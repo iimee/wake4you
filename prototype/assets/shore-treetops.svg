@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 84" preserveAspectRatio="none">
+  <defs>
+    <path id="fir" d="M0 0 4 10 3 11 8 18 6 18 13 26 10 25 18 34 14 33 24 43 18 42 29 54 22 53 33 65H-33l12-12-7 2 11-12-6 1 9-10-4 1 8-9-4 1 8-9-3 1 6-8-2 1Z"/>
+    <path id="pine" d="M0 0 6 9 5 13 13 16 15 21 22 25 18 27 28 32 24 35 33 38 29 43 38 49V66h-76V48l9-6-5-2 12-6-6-2 12-5-4-2 10-6-2-2 6-5Z"/>
+    <mask id="sky" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="84" style="mask-type:luminance">
+      <rect width="1000" height="84" fill="white"/>
+      <path d="M0 64 26 61 63 69 96 62 145 67 181 74 227 68 264 67 299 76 340 70 388 72 419 69 448 75 496 72 551 78 594 74 633 69 691 74 727 65 756 70 793 66 822 65 859 70 911 63 943 70 978 62 1000 66V84H0Z"/>
+      <use href="#pine" transform="translate(-3 30) scale(.93 1)"/>
+      <use href="#fir" transform="translate(38 21) scale(.92 1)"/>
+      <use href="#fir" transform="translate(77 36) scale(.74 .85)"/>
+      <use href="#pine" transform="translate(118 11) scale(1 1.03)"/>
+      <use href="#fir" transform="translate(151 32) scale(.77 .9)"/>
+      <use href="#fir" transform="translate(191 38) scale(.95 .79)"/>
+      <use href="#pine" transform="translate(231 29) scale(.88 .9)"/>
+      <use href="#fir" transform="translate(273 18) scale(1.05 1.1)"/>
+      <use href="#fir" transform="translate(309 40) scale(.65 .82)"/>
+      <use href="#pine" transform="translate(350 46) scale(.95 .62)"/>
+      <use href="#fir" transform="translate(385 30) scale(.75 .92)"/>
+      <use href="#pine" transform="translate(426 44) scale(.94 .71)"/>
+      <use href="#fir" transform="translate(463 38) scale(.72 .78)"/>
+      <use href="#fir" transform="translate(510 48) scale(.95 .65)"/>
+      <use href="#pine" transform="translate(547 51) scale(.81 .62)"/>
+      <use href="#fir" transform="translate(591 29) scale(.94 .9)"/>
+      <use href="#fir" transform="translate(626 37) scale(.75 .8)"/>
+      <use href="#pine" transform="translate(669 39) scale(.9 .79)"/>
+      <use href="#fir" transform="translate(703 23) scale(.82 1)"/>
+      <use href="#fir" transform="translate(747 14) scale(1.03 1.05)"/>
+      <use href="#pine" transform="translate(787 30) scale(.97 .92)"/>
+      <use href="#fir" transform="translate(826 18) scale(.95 1.05)"/>
+      <use href="#fir" transform="translate(863 38) scale(.8 .78)"/>
+      <use href="#pine" transform="translate(901 10) scale(1.07 1.13)"/>
+      <use href="#fir" transform="translate(944 32) scale(.88 .86)"/>
+      <use href="#fir" transform="translate(980 19) scale(.91 1.02)"/>
+      <use href="#pine" transform="translate(1014 25) scale(.95 .96)"/>
+    </mask>
+  </defs>
+  <rect width="1000" height="84" mask="url(#sky)"/>
+</svg>

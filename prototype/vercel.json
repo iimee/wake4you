@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": ".",
+  "buildCommand": "",
+  "installCommand": "",
+  "rewrites": [
+    { "source": "/tz", "destination": "/assets/wake4you-tz.html" },
+    { "source": "/tz/pravki", "destination": "/assets/wake4you-edits.html" },
+    { "source": "/:section(place|events|kitchen|water|visit)", "destination": "/index.html" }
+  ]
+}

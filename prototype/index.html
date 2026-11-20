@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111814">
+  <meta name="description" content="Wake4You — события, кухня и отдых у воды. Откройте своё место на Волкушинском карьере.">
+  <title>Wake4You — свои на берегу</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/golos-regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/assets/shore-hero-poster.jpg" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="/cinema.css">
+  <link rel="stylesheet" href="/poster.css">
+  <link rel="stylesheet" href="/chapters.css">
+  <link rel="stylesheet" href="/assets/night-scene.css">
+  <link rel="stylesheet" href="/assets/water-scene.css">
+  <link rel="stylesheet" href="/assets/terrace.css">
+  <link rel="stylesheet" href="/assets/mobile-party.css">
+  <link rel="stylesheet" href="/assets/mobile-terrace.css">
+  <link rel="stylesheet" href="/assets/mobile-water.css">
+  <script src="/cinema.js" type="module"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">К содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Wake4You — главная"><img src="/assets/logo.png" alt="Wake4You" width="1764" height="593"></a>
+    <nav class="desktop-nav" aria-label="Основная навигация"><a href="#events">События</a><a href="#place">Место</a><a href="#kitchen">Кухня</a><a href="#water">На воде</a><a href="#visit">Как добраться</a></nav>
+    <button class="header-book" data-book="">Забронировать</button>
+    <button class="menu-button" aria-expanded="false" aria-controls="menu-panel">Меню <span aria-hidden="true">☰</span></button>
+  </header>
+  <main id="main" tabindex="-1">
+    <div class="shore-sequence">
+      <section class="shore-hero" data-scene data-comic-drift id="top" aria-labelledby="hero-title">
+        <video class="shore-film" data-hero-video data-desktop="/assets/shore-hero.mp4" data-mobile="/assets/shore-hero-mobile.mp4" poster="/assets/shore-hero-poster.jpg" muted playsinline loop preload="none" aria-hidden="true"></video>
+        <div class="hero-ink" aria-hidden="true"></div>
+        <div class="hero-rip" aria-hidden="true">
+          <div class="hero-rip-photo"></div>
+          <div class="hero-rip-dots"></div>
+        </div>
+        <i class="hero-stroke hero-stroke-a" aria-hidden="true"></i><i class="hero-stroke hero-stroke-b" aria-hidden="true"></i>
+        <div class="hero-duo"><img src="/assets/cast/duo-still.webp" data-cast="duo" width="443" height="443" alt="Рисованная пара танцует на фоне ночной фотографии парка"></div>
+        <div class="hero-inside wrap">
+          <div class="hero-location"><span class="location-mark" aria-hidden="true"></span> Лыткарино · Волкушинский карьер</div>
+          <div class="hero-message">
+            <h1 id="hero-title">Все свои<br><em>на берегу</em></h1>
+            <p>Днём — гриль и терраса у воды.<br> После заката — музыка и танцы.</p>
+            <div class="hero-actions">
+              <a class="red-button" href="#events">Собрать своих</a>
+              <button data-film class="film-caption"><span aria-hidden="true">▶</span> Фильм о парке</button>
+            </div>
+          </div>
+          <button class="hero-pause" data-motion-toggle aria-label="Приостановить движение" aria-pressed="false"><span data-motion-icon aria-hidden="true">Ⅱ</span></button>
+        </div>
+      </section>
+
+      <section id="place" class="terrace-scene" data-scene aria-labelledby="place-title">
+        <div class="terrace-layout wrap">
+          <div class="terrace-feature">
+            <img class="terrace-landscape" src="/assets/deck-sun.jpg" alt="Открытая деревянная терраса парка" loading="lazy">
+            <img class="party-toast" data-cast="toast" data-still="/assets/beer-clink-still.png" data-motion-src="/assets/beer-clink.gif"
+                 src="/assets/beer-clink-still.png" width="443" height="443" alt="Двое друзей чокаются бутылками пива" loading="lazy">
+            <div class="terrace-copy">
+              <p class="terrace-eyebrow">Площадка и кухня</p>
+              <h2 id="place-title" aria-label="Все свои на берегу"><span class="terrace-title-line">Все свои<span class="terrace-title-kicker">Площадка<br>и кухня</span></span><br class="terrace-desktop-line"><em>на берегу</em></h2>
+              <p>Стол на свежем воздухе или в зале с большими окнами. К обеду — мясо с гриля и закуски для всей компании.</p>
+            </div>
+            <div class="night-actions">
+              <button class="night-book" data-book="">Собрать компанию</button>
+              <a class="night-social-events" href="https://t.me/wake4you" target="_blank" rel="noreferrer">Посмотреть события</a>
+            </div>
+          </div>
+          <div class="mobile-terrace-gallery" data-terrace-gallery role="region" aria-roledescription="карусель" aria-label="Фотографии террасы" tabindex="0">
+            <figure class="mobile-terrace-frame">
+              <img data-terrace-image src="/assets/venue.jpg" alt="Терраса парка с деревянным настилом и залом у воды" loading="lazy">
+            </figure>
+            <button class="comic-gallery-arrow mobile-terrace-arrow mobile-terrace-prev" type="button" data-terrace-prev aria-label="Предыдущее фото террасы"></button>
+            <button class="comic-gallery-arrow mobile-terrace-arrow mobile-terrace-next" type="button" data-terrace-next aria-label="Следующее фото террасы"></button>
+            <span class="mobile-terrace-count" data-terrace-count aria-live="polite">01 / 04</span>
+          </div>
+          <div class="terrace-album">
+            <img class="mobile-terrace-table" src="/assets/table.jpg" alt="Накрытый стол возле панорамных окон" loading="lazy">
+            <button type="button" class="terrace-table-photo" data-photo="/assets/table.jpg" data-caption="За столом у панорамного окна" aria-label="Увеличить фото накрытого стола"><img src="/assets/table.jpg" alt="Накрытый стол возле панорамных окон" loading="lazy"></button>
+            <div class="terrace-tastes" aria-label="Фотографии кухни">
+              <button data-photo="/assets/bbq-close.jpg" data-caption="Мясо на решётке над углями"><img src="/assets/bbq-close.jpg" alt="" loading="lazy"><span>Гриль ↗</span></button>
+              <button data-photo="/assets/food-detail.jpg" data-caption="Закуски для фуршета"><img src="/assets/food-detail.jpg" alt="" loading="lazy"><span>Закуски ↗</span></button>
+            </div>
+          </div>
+          <div class="mobile-serving-moment" aria-hidden="true">
+            <span class="mobile-serving-light"></span>
+            <span class="mobile-serving-door"></span>
+            <span class="mobile-serving-actor"><span class="mobile-serving-frames"></span></span>
+          </div>
+          <div id="kitchen" class="terrace-actions" aria-label="Кухня и зал">
+            <div class="mobile-kitchen" aria-labelledby="mobile-kitchen-title">
+              <h3 id="mobile-kitchen-title">Кухня</h3>
+              <p class="mobile-kitchen-copy">Мясо с гриля, закуски и общий стол. Соберём меню под вашу компанию.</p>
+              <div class="mobile-kitchen-gallery" aria-label="Гриль и закуски">
+                <img class="mobile-kitchen-main" src="/assets/bbq-close.jpg" alt="Мясо готовится на решётке над открытым грилем" loading="lazy">
+                <img src="/assets/canapes.jpg" alt="Фуршетные закуски с красной рыбой и овощами" loading="lazy">
+                <img src="/assets/food-detail.jpg" alt="Закуски на большом подносе" loading="lazy">
+              </div>
+            </div>
+            <button class="terrace-menu" data-book="Кухня">Обсудить меню <span aria-hidden="true">↗</span></button>
+            <button class="terrace-hall" data-photo="/assets/hall.jpg" data-caption="Панорамный зал для компании">Посмотреть зал <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section id="water" aria-labelledby="water-title">
+      <div class="waterstage" data-scene>
+        <div class="waterstage-panorama">
+          <picture class="waterstage-backdrop">
+            <source media="(max-width: 760px)" srcset="/assets/wake-action.jpg">
+            <img class="waterstage-film" src="/assets/lake.jpg" alt="Волкушинский карьер в вейк-парке" loading="lazy">
+          </picture>
+          <div class="waterstage-title">
+            <p class="waterstage-kicker">Вейк и SUP</p>
+            <h2 id="water-title">На волне<span>!</span></h2>
+            <p>Первые старты и трюки на вейке.<br>Прогулки вдоль берега на SUP.</p>
+          </div>
+          <div class="waterstage-riders" role="group" aria-label="Два райдера на воде">
+            <img class="waterstage-rider waterstage-carve" data-cast="carve" src="/assets/cast/carve-still.webp" alt="Вейкбордист скользит по воде" loading="lazy">
+            <img class="waterstage-rider waterstage-jump" data-cast="backflip" src="/assets/cast/backflip-still.webp" alt="Вейкбордист делает сальто над карьером" loading="lazy">
+          </div>
+          <img class="waterstage-foreground" src="/assets/water-terrace.jpg" alt="Диваны и стол на открытой террасе" loading="lazy">
+          <div class="waterstage-actions">
+            <p>При записи уточним время катания и подберём оборудование.</p>
+            <div>
+              <button data-book="Вейк" aria-label="Записаться на вейк"><span class="water-label">Записаться на вейк</span><span class="water-short" aria-hidden="true">Вейк</span><span aria-hidden="true">↗</span></button>
+              <button data-book="SUP" aria-label="Записаться на SUP"><span class="water-label">Записаться на SUP</span><span class="water-short" aria-hidden="true">SUP</span><span aria-hidden="true">↗</span></button>
+              <button data-photo="/assets/sup-water.jpg" data-caption="SUP на Волкушинском карьере">Фото SUP <span aria-hidden="true">↗</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="night-party" data-scene data-comic-drift>
+        <img class="night-party-photo" src="/assets/dj-night-stage.jpg" alt="" loading="lazy">
+        <video class="night-party-film" data-party-video data-desktop="/assets/dj-stage-user-loop.mp4"
+         poster="/assets/dj-night-stage.jpg" autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
+        <div class="night-party-shade" aria-hidden="true"></div>
+        <div class="night-party-stage">
+          <div class="night-intro">
+            <div class="hero-location"><span class="location-mark" aria-hidden="true"></span> Лыткарино · Волкушинский карьер</div>
+            <div class="hero-message">
+              <div class="hero-actions"><a class="red-button" href="#party-gallery-title">Собрать своих</a></div>
+              <p>Днём — гриль и терраса у воды.<br> После заката — музыка и танцы.</p>
+            </div>
+          </div>
+          <img class="hero-backflip" data-cast="backflip" data-motion-src="/assets/cast/backflip-poster.webp"
+         data-still="/assets/cast/backflip-takeoff-still.webp" src="/assets/cast/backflip-takeoff-still.webp"
+         alt="Вейкбордист делает сальто" loading="lazy">
+          <div class="night-ink-panel" aria-hidden="true"></div>
+          <div class="night-dj-wrap">
+            <img class="night-dj" data-cast="dj" data-cue-performer src="/assets/cast/dj-still.webp" alt="Диджей за пультом">
+            <canvas class="night-dj night-dj-frames" width="443" height="443" data-atlas="/assets/cast/dj-frames.webp" aria-hidden="true" hidden></canvas>
+          </div>
+          <img class="night-pair night-duo" data-cast="duo" src="/assets/cast/duo-still.webp" alt="Танцующая пара">
+          <img class="night-pair night-duo-right" data-cast="duo-comic"
+         src="/assets/cast/duo-comic-still.webp" alt="Танцующая пара в джинсах и голубом костюме">
+          <ul class="night-events" aria-label="События в парке"><li>Дискотеки</li><li>Дни рождения</li><li>Корпоративы</li><li>Вечеринки у воды</li></ul>
+          <img class="night-trio" data-cast="trio" src="/assets/cast/trio-still.webp" alt="Танцующая компания">
+        </div>
+        <span class="night-burst night-burst-a" aria-hidden="true"></span>
+        <span class="night-burst night-burst-b" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <section id="events" class="party-photos" data-scene aria-label="Все на танцпол">
+      <div class="party-gallery" data-party-gallery aria-label="Слайдер фотографий" role="region">
+        <header class="party-gallery-heading">
+          <h2 class="night-title" id="party-gallery-title" aria-label="Все на танцпол" aria-describedby="party-gallery-kicker">
+            <span class="party-title-line"><span class="party-title-word">Все</span><span class="night-kicker" id="party-gallery-kicker">Вечеринки<br>и корпоративы</span></span>
+            <em>на танцпол</em>
+          </h2>
+        </header>
+        <div class="night-copy">
+          <p class="night-kicker">Вечеринки и корпоративы</p>
+          <h2 class="night-title" id="events-title">Все на<br><em>танцпол</em></h2>
+          <div class="night-actions">
+            <button class="night-book" data-book="">Собрать компанию <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+        <div class="party-gallery-track" data-party-track tabindex="0" aria-label="Листайте фотографии вечеринки">
+          <img src="/assets/party-dancers.jpg" alt="Гости танцуют в красном и синем свете" loading="lazy">
+          <img src="/assets/dj.jpg" alt="Диджей за пультом на ночной вечеринке" loading="lazy">
+          <img src="/assets/party.jpg" alt="Гости на танцполе под красными навесами" loading="lazy">
+        </div>
+        <button class="comic-gallery-arrow party-gallery-arrow party-gallery-prev" type="button" data-party-step="-1" aria-label="Предыдущее фото"></button>
+        <button class="comic-gallery-arrow party-gallery-arrow party-gallery-next" type="button" data-party-step="1" aria-label="Следующее фото"></button>
+      </div>
+    </section>
+
+    <section id="visit" class="arrival" aria-labelledby="visit-title">
+      <img class="arrival-photo" src="/assets/deck-night.jpg" alt="Вечерняя дорожка вдоль освещённой террасы парка" loading="lazy">
+      <div class="arrival-inner wrap">
+        <p class="arrival-kicker">Как добраться</p>
+        <h2 id="visit-title">Встретимся<br><em>на берегу</em></h2>
+        <address>Wake4You, Волкушинский карьер<br>Лыткарино, Московская область</address>
+        <div class="arrival-links">
+          <a class="arrival-map" href="https://yandex.ru/maps/?text=Wake4You%20Лыткарино" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах <span aria-hidden="true">↗</span></a>
+          <button class="arrival-pier" data-photo="/assets/lake.jpg" data-caption="Волкушинский карьер и причал у парка">Фото причала <span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="arrival-note">Точку въезда и парковку уточните перед поездкой.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="harbor-footer">
+    <div class="harbor-inner wrap">
+      <div class="harbor-nav">
+        <a class="harbor-brand" href="#top" aria-label="Wake4You — в начало">Wake4You</a>
+        <nav aria-label="Навигация в подвале"><a href="#events">События</a><a href="#place">Терраса</a><a href="#kitchen">Кухня</a><a href="#water">Вейк и SUP</a></nav>
+        <button class="harbor-book" data-book="">Забронировать <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="harbor-end"><span>© Wake4You, 2026</span><button data-motion-toggle aria-pressed="false"><span data-motion-icon aria-hidden="true">Ⅱ</span> <span data-motion-label>Приостановить движение</span></button><a href="#top">Наверх ↑</a></div>
+    </div>
+  </footer>
+
+  <dialog class="menu-dialog" id="menu-panel" aria-label="Меню сайта"><button class="close-button" data-close aria-label="Закрыть меню">×</button><span class="eyebrow">Меню</span><nav><a href="#top">Главная</a><a href="#events">События</a><a href="#place">Место</a><a href="#kitchen">Кухня</a><a href="#water">На воде</a><a href="#visit">Приехать</a></nav></dialog>
+  <dialog class="booking-dialog" aria-labelledby="booking-title">
+    <button class="close-button" data-close aria-label="Закрыть бронирование">×</button>
+    <div class="booking-shell">
+      <p class="eyebrow" data-booking-step>01 / Твой день</p>
+      <h2 id="booking-title">Как проведём<br>этот день?</h2>
+      <div class="booking-choices"><button data-choose="День у воды">Просто отдохнуть <span>↗</span></button><button data-choose="Корпоратив">Собрать команду <span>↗</span></button><button data-choose="Вечеринка">Устроить вечеринку <span>↗</span></button><button data-choose="День рождения">Отметить день рождения <span>↗</span></button><button data-choose="Кухня">Собраться за столом <span>↗</span></button><button data-choose="Вейк / SUP">Выйти на воду <span>↗</span></button></div>
+      <form id="booking-form" hidden>
+        <button class="change-occasion" type="button" data-change-occasion>← Изменить повод</button>
+        <input name="occasion" type="hidden">
+        <div class="form-row"><label>Как тебя зовут<input name="name" placeholder="Имя" autocomplete="given-name" required maxlength="80"></label><label>Когда удобно<input name="date" type="date" aria-label="Желаемая дата, необязательно"></label></div>
+        <label>Как связаться<input name="contact" placeholder="Телефон или мессенджер" autocomplete="tel" required minlength="5" maxlength="120"></label>
+        <label>Сколько вас будет <span class="optional">необязательно</span><select name="guests"><option value="">Выбрать</option><option>До 10</option><option>10–30</option><option>30–50</option><option>Больше 50</option></select></label>
+        <button type="submit" class="solid-button">Обсудить мой день <span>↗</span></button>
+        <p class="demo-note">Демонстрация: заявка никуда не отправляется.</p>
+      </form>
+      <div class="booking-result" hidden role="status"><span class="result-check" aria-hidden="true">✓</span><p data-result></p><p class="demo-note">Это пример заявки. Отправка ещё не подключена, бронирование не создано.</p><button class="line-link" data-close>Вернуться в парк <span>↗</span></button></div>
+    </div>
+  </dialog>
+  <dialog class="photo-dialog" aria-label="Фотографии парка"><button class="close-button" data-close aria-label="Закрыть фотографии">×</button><img src="/assets/lake.jpg" alt=""><div class="photo-caption"><p></p><div><button data-photo-prev aria-label="Предыдущая фотография">←</button><span data-photo-count></span><button data-photo-next aria-label="Следующая фотография">→</button></div></div></dialog>
+  <dialog class="film-dialog" aria-label="Фильм о парке"><button class="close-button" data-close aria-label="Закрыть фильм">×</button><video controls playsinline preload="none" poster="/assets/place-poster.jpg" aria-label="Фильм Wake4You, 30 секунд"><source data-src="/assets/park-film.mp4" type="video/mp4"></video></dialog>
+  <script type="module" src="/assets/mobile-terrace.js"></script>
+
+</body>
+</html>
+
+

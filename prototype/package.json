@@ -1,0 +1,1 @@
+{"name":"wake4you-poster","version":"4.0.0","private":true,"type":"module","scripts":{"start":"node server.mjs","check":"node --check cinema.js && node --check chapters.js && node --check content.js && node --check server.mjs"}}

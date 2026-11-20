@@ -1,0 +1,101 @@
+/* Mobile-only water photo, booking actions and compact arrival details. */
+.waterstage-backdrop { display:contents; }
+
+@media(max-width:760px) {
+  /*
+   * Keep the existing water composition, but let it scroll as a single,
+   * ordinary section on phones. The desktop sticky scene stays untouched.
+   */
+  .waterstage {
+    position:relative;
+    min-height:0;
+    padding:0 0 18px;
+    overflow:clip;
+    background:linear-gradient(180deg,#172624 0%,#101b1d 100%);
+  }
+  .waterstage .waterstage-panorama {
+    position:relative;
+    isolation:isolate;
+    top:auto;
+    height:clamp(650px,88svh,810px);
+    min-height:0;
+    border-radius:0 0 18px 18px;
+    box-shadow:0 24px 46px -24px #07110fe0;
+  }
+  .waterstage .waterstage-panorama::before {
+    content:"";
+    position:absolute;
+    z-index:2;
+    inset:0 0 auto;
+    height:clamp(42px,9vw,62px);
+    pointer-events:none;
+    background:#151712;
+    border-bottom:2px solid #34717a;
+    border-bottom-left-radius:91% 100%;
+  }
+  .waterstage .waterstage-title { top:clamp(55px,10vw,79px); }
+  .waterstage .waterstage-title > p,
+  .waterstage .waterstage-actions > p {
+    display:none;
+  }
+  .waterstage .waterstage-actions {
+    padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+
+  .waterstage-film {
+    object-position:24% 51%;
+  }
+  .waterstage-riders { translate:-5px 0; }
+  .waterstage-actions .water-label { display:none; }
+  .waterstage-actions .water-short { display:inline; }
+
+  .waterstage-actions>div {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+  .waterstage-actions>div button {
+    justify-content:center;
+    min-height:48px;
+    padding:10px 12px;
+    border:1px solid #ffe064;
+    border-radius:3px;
+    background:#ffe064;
+    color:#182120;
+    font-size:.9rem;
+    font-weight:750;
+    text-decoration:none;
+    text-underline-offset:0;
+  }
+  .waterstage-actions>div button span { color:#182120; }
+  .waterstage-actions>div button:hover { color:#182120; }
+  .waterstage-actions>div [data-photo] { display:none; }
+
+  .arrival-pier,.arrival-note,.arrival-photo,.arrival::before { display:none; }
+  .arrival { min-height:0; border-top:4px solid #ffe064; background:#191b18; }
+  .arrival-inner { padding-block:34px 30px; }
+  .arrival-links { margin-top:14px; }
+  .arrival-map {
+    min-height:48px;
+    padding:0 15px;
+    background:#ffe064;
+    color:#182120;
+    font-size:.88rem;
+    font-weight:750;
+  }
+  .harbor-nav { grid-template-columns:1fr auto; min-height:68px; }
+  .harbor-nav nav { display:none; }
+}
+
+@media(max-width:390px) {
+  .waterstage-actions>div button { padding-inline:8px; font-size:.8rem; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .waterstage .waterstage-film,
+  .waterstage .waterstage-foreground,
+  .waterstage .waterstage-rider {
+    transform:none;
+  }
+}
+
