@@ -345,7 +345,9 @@ function bookingStep(occasion = '') {
   bookingChoices.hidden = Boolean(occasion);
   bookingDialog.querySelector('[data-booking-step]').textContent = occasion ? '02 / Несколько деталей' : '01 / Твой день';
   bookingDialog.querySelector('#booking-title').innerHTML = occasion ? 'Собираемся<br>в Wake4You' : 'Как проведём<br>этот день?';
-  bookingDialog.querySelector('[data-water-prices]').hidden = !['Вейк', 'SUP', 'Вейк / SUP'].includes(occasion);
+  const prices = bookingDialog.querySelector('[data-water-prices]');
+  prices.open = false;
+  prices.hidden = !['Вейк', 'SUP', 'Вейк / SUP'].includes(occasion);
   if (occasion) {
     bookingForm.elements.occasion.value = occasion;
     bookingDialog.querySelector('[data-change-occasion]').textContent = `← ${occasion} · изменить`;
@@ -372,6 +374,10 @@ bookingForm?.addEventListener('submit', event => {
   if (!bookingForm.reportValidity()) return;
   const {occasion, date, guests} = bookingForm.elements;
   const lines = [`Здравствуйте! Меня зовут ${name}. Хочу обсудить бронирование в Wake4You.`, `Повод: ${occasion.value}.`];
+  if (occasion.value === 'Кухня') lines.push('Пришлите, пожалуйста, меню и условия бронирования столика.');
+  if (['Корпоратив', 'День рождения', 'Вечеринка'].includes(occasion.value)) {
+    lines.push('Подскажите, пожалуйста, стоимость аренды, варианты меню и условия проведения мероприятия.');
+  }
   if (date.value) lines.push(`Дата: ${date.value.split('-').reverse().join('.')}.`);
   if (guests.value) lines.push(`Количество гостей: ${guests.value}.`);
   const message = lines.join('\n');

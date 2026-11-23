@@ -189,3 +189,14 @@ html { scroll-padding-top: var(--nav-height); }
   .harbor-end button { gap:3px; }
 }
 
+
+.park-details { max-width:42rem; margin-top:20px; border-top:1px solid #fff5; }
+.park-details details { border-bottom:1px solid #fff4; }
+.park-details summary,.booking-prices summary { padding:.8rem 0; cursor:pointer; font-weight:650; }
+.park-details p { max-width:52ch; line-height:1.55; margin:0 0 .65rem; }
+.park-details details>a { display:block; width:fit-content; padding:.45rem 0; text-decoration:underline; text-underline-offset:.2em; }
+.park-details details[open] { padding-bottom:.7rem; }
+.booking-prices table { width:100%; margin-bottom:.85rem; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+.booking-prices caption { text-align:left; padding-bottom:.5rem; }
+.booking-prices th,.booking-prices td { padding:.55rem .1rem; border-bottom:1px solid currentColor; text-align:right; }
+.booking-prices th:first-child { text-align:left; }
