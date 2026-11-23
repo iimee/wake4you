@@ -83,19 +83,3 @@ if (gallery) {
 
   if (matchMedia('(max-width:760px)').matches) preload(1);
 }
-
-const servingMoment = document.querySelector('.mobile-serving-moment');
-
-if (servingMoment && 'IntersectionObserver' in window) {
-  let isIntersecting = false;
-  const updateMotion = () => {
-    servingMoment.classList.toggle('is-visible', isIntersecting && !document.hidden);
-  };
-  const visibilityObserver = new IntersectionObserver(([entry]) => {
-    isIntersecting = entry.isIntersecting;
-    updateMotion();
-  }, { threshold: 0.01 });
-
-  visibilityObserver.observe(servingMoment);
-  document.addEventListener('visibilitychange', updateMotion);
-}
