@@ -1,0 +1,44 @@
+name: Deploy Wake4You to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - prototype/**
+      - scripts/build-pages.mjs
+      - .github/workflows/pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build Wake4You
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: node scripts/build-pages.mjs "$PAGES_BASE_PATH"
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
