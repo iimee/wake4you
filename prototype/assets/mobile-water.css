@@ -1,5 +1,9 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
 .waterstage-backdrop { display:contents; }
+.waterstage-wave,.waterstage-details { display:none; }
+.activity-dialog .booking-shell h2 { margin:12px 0 16px; }
+.activity-dialog p { max-width:36ch; line-height:1.5; }
+.activity-dialog .solid-button { margin-top:24px; }
 
 @media(max-width:760px) {
   #water { --party-cut-depth:clamp(27px,7vw,44px); }
@@ -15,60 +19,90 @@
     background:linear-gradient(180deg,#172624 0%,#101b1d 100%);
   }
   .waterstage .waterstage-panorama {
+    --wave-height:clamp(250px,72vw,370px);
     position:relative;
     isolation:isolate;
     top:auto;
-    height:clamp(650px,88svh,810px);
+    height:calc(var(--wave-height) + clamp(390px,110vw,530px));
     min-height:0;
   }
-  .waterstage .waterstage-panorama::before {
-    content:"";
+  .waterstage-wave {
     position:absolute;
-    z-index:2;
+    z-index:0;
     inset:0 0 auto;
-    height:clamp(42px,9vw,62px);
+    display:block;
+    height:calc(var(--wave-height) + 64px);
     pointer-events:none;
-    background:#151712;
-    border-bottom:2px solid #34717a;
-    border-bottom-left-radius:91% 100%;
+    background:
+      linear-gradient(180deg,#151712 0%,#15171221 34%,#1023241c 69%,transparent 100%),
+      linear-gradient(96deg,#112a2be6,transparent 78%),
+      url('/assets/lake.jpg') center 38% / cover no-repeat;
+    mask-image:linear-gradient(#000 calc(100% - 68px),transparent);
   }
-  .waterstage .waterstage-title { top:clamp(55px,10vw,79px); }
-  .waterstage .waterstage-title > p,
-  .waterstage .waterstage-actions > p {
-    display:none;
+  .waterstage-wave::before,.waterstage-wave::after {
+    position:absolute;
+    inset:0;
+    content:"";
   }
-  .waterstage .waterstage-actions {
-    padding-bottom:max(calc(var(--party-cut-depth) + 6px),env(safe-area-inset-bottom));
+  .waterstage-wave::before {
+    background:
+      radial-gradient(circle,#8acdd66b 1px,transparent 1.3px) 0 0 / 7px 7px,
+      linear-gradient(168deg,#56d2dc,#18586f 57%,#163c46 76%,transparent);
+    clip-path:polygon(0 55%,15% 53%,28% 47%,46% 34%,62% 24%,77% 22%,84% 17%,91% 8%,95% 3%,100% 4%,100% 69%,88% 63%,75% 64%,61% 75%,49% 86%,34% 91%,14% 88%,0 84%);
   }
-
-  .waterstage-film {
-    object-position:24% 51%;
+  .waterstage-wave::after {
+    background:url('/assets/comic-shore-break.webp') center 39% / 108% 105% no-repeat;
   }
-  .waterstage-riders { translate:-5px 0; }
-  .waterstage-actions .water-label { display:none; }
-  .waterstage-actions .water-short { display:inline; }
-
-  .waterstage-actions>div {
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
+  .waterstage-wave-rider {
+    position:absolute;
+    z-index:1;
+    width:clamp(82px,25vw,158px);
+    height:auto;
+    right:5%;
+    top:8%;
+    filter:drop-shadow(1px 2px 0 #142327);
+  }
+  .waterstage .waterstage-title {
+    top:clamp(94px,29vw,164px);
+    max-width:90%;
+  }
+  .waterstage .waterstage-title h2 {
+    margin:0;
+    font-size:clamp(48px,12vw,90px);
+    white-space:nowrap;
+    text-shadow:2px 4px #17292b,0 4px 16px #16292b;
+  }
+  .waterstage .waterstage-title > p,.waterstage .waterstage-actions { display:none; }
+  .waterstage-details {
+    position:absolute;
+    z-index:3;
+    top:clamp(156px,46vw,264px);
+    left:var(--gutter);
+    display:flex;
     gap:9px;
   }
-  .waterstage-actions>div button {
-    justify-content:center;
+  .waterstage-details button {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    min-width:98px;
     min-height:48px;
     padding:10px 12px;
     border:1px solid #ffe064;
-    border-radius:3px;
     background:#ffe064;
     color:#182120;
-    font-size:.9rem;
-    font-weight:750;
-    text-decoration:none;
-    text-underline-offset:0;
+    font:750 .9rem/1.2 Golos,Arial,sans-serif;
+    box-shadow:3px 3px #17292b;
   }
-  .waterstage-actions>div button span { color:#182120; }
-  .waterstage-actions>div button:hover { color:#182120; }
-  .waterstage-actions>div [data-photo] { display:none; }
+  .waterstage-details button:hover { background:#fff1ab; }
+  .waterstage-film {
+    top:calc(var(--wave-height) - 48px);
+    height:calc(100% - var(--wave-height) + 48px);
+    object-position:24% 51%;
+    mask-image:linear-gradient(transparent,#000 62px);
+  }
+  .waterstage-riders { translate:-5px 0; }
 
   .arrival-pier,.arrival-note,.arrival-photo,.arrival::before { display:none; }
   .arrival { min-height:0; border-top:4px solid #ffe064; background:#191b18; }
@@ -84,10 +118,6 @@
   }
   .harbor-nav { grid-template-columns:1fr auto; min-height:68px; }
   .harbor-nav nav { display:none; }
-}
-
-@media(max-width:390px) {
-  .waterstage-actions>div button { padding-inline:8px; font-size:.8rem; }
 }
 
 @media(prefers-reduced-motion:reduce) {

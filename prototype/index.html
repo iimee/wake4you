@@ -59,6 +59,7 @@
             <img class="terrace-landscape" src="/assets/deck-sun.jpg" alt="Открытая деревянная терраса парка" loading="lazy">
             <img class="party-toast" data-cast="toast" data-still="/assets/beer-clink-still.png" data-motion-src="/assets/beer-clink.gif"
                  src="/assets/beer-clink-still.png" width="443" height="443" alt="Двое друзей чокаются бутылками пива" loading="lazy">
+            <img class="terrace-dancers" data-cast="duo-comic" src="/assets/cast/duo-comic-still.webp" width="443" height="443" alt="" loading="lazy">
             <div class="terrace-copy">
               <p class="terrace-eyebrow">Площадка и кухня</p>
               <h2 id="place-title" aria-label="Все свои на берегу"><span class="terrace-title-line">Все свои<span class="terrace-title-kicker">Площадка<br>и кухня</span></span><br class="terrace-desktop-line"><em>на берегу</em></h2>
@@ -83,7 +84,11 @@
             <span class="mobile-terrace-count" data-terrace-count aria-live="polite">01 / 04</span>
           </div>
           <div class="terrace-album">
-            <img class="mobile-terrace-table" src="/assets/table.jpg" alt="Накрытый стол возле панорамных окон" loading="lazy">
+            <div class="mobile-terrace-table">
+              <img class="terrace-table-backdrop" src="/assets/table.jpg" alt="Накрытый стол возле панорамных окон" width="1280" height="960" loading="lazy">
+              <img class="terrace-table-guests" src="/assets/cast/table-guests.webp" alt="" width="720" height="543" loading="lazy">
+              <a class="terrace-kitchen-link" href="#kitchen">К кухне <span aria-hidden="true">↓</span></a>
+            </div>
             <button type="button" class="terrace-table-photo" data-photo="/assets/table.jpg" data-caption="За столом у панорамного окна" aria-label="Увеличить фото накрытого стола"><img src="/assets/table.jpg" alt="Накрытый стол возле панорамных окон" loading="lazy"></button>
             <div class="terrace-tastes" aria-label="Фотографии кухни">
               <button data-photo="/assets/bbq-close.jpg" data-caption="Мясо на решётке над углями"><img src="/assets/bbq-close.jpg" alt="" loading="lazy"><span>Гриль ↗</span></button>
@@ -94,10 +99,14 @@
             <div class="mobile-kitchen" aria-labelledby="mobile-kitchen-title">
               <h3 id="mobile-kitchen-title">Кухня</h3>
               <p class="mobile-kitchen-copy">Стол на свежем воздухе или в зале с большими окнами. К обеду — мясо с гриля и закуски для всей компании.</p>
-              <div class="mobile-kitchen-gallery" aria-label="Гриль и закуски">
-                <img class="mobile-kitchen-main" src="/assets/bbq-close.jpg" alt="Мясо готовится на решётке над открытым грилем" loading="lazy">
-                <img src="/assets/canapes.jpg" alt="Фуршетные закуски с красной рыбой и овощами" loading="lazy">
-                <img src="/assets/food-detail.jpg" alt="Закуски на большом подносе" loading="lazy">
+              <div class="mobile-kitchen-gallery" data-snap-gallery role="region" aria-roledescription="карусель" aria-label="Гриль и закуски">
+                <div class="mobile-kitchen-track" data-snap-track tabindex="0" aria-label="Листайте фотографии кухни">
+                  <img src="/assets/bbq-close.jpg" alt="Мясо готовится на решётке над открытым грилем" loading="lazy">
+                  <img src="/assets/canapes.jpg" alt="Фуршетные закуски с красной рыбой и овощами" loading="lazy">
+                  <img src="/assets/food-detail.jpg" alt="Закуски на большом подносе" loading="lazy">
+                </div>
+                <button class="comic-gallery-arrow party-gallery-prev" type="button" data-snap-step="-1" aria-label="Предыдущее фото кухни"></button>
+                <button class="comic-gallery-arrow party-gallery-next" type="button" data-snap-step="1" aria-label="Следующее фото кухни"></button>
               </div>
             </div>
             <button class="terrace-menu" data-book="Кухня">Обсудить меню <span aria-hidden="true">↗</span></button>
@@ -110,6 +119,9 @@
     <section id="water" aria-labelledby="water-title">
       <div class="waterstage" data-scene>
         <div class="waterstage-panorama">
+          <div class="waterstage-wave" aria-hidden="true">
+            <img class="waterstage-wave-rider" data-cast="carve" src="/assets/cast/carve-still.webp" width="443" height="443" alt="" loading="lazy">
+          </div>
           <picture class="waterstage-backdrop">
             <source media="(max-width: 760px)" srcset="/assets/wake-action.jpg">
             <img class="waterstage-film" src="/assets/lake.jpg" alt="Волкушинский карьер в вейк-парке" loading="lazy">
@@ -118,6 +130,10 @@
             <p class="waterstage-kicker">Вейк и SUP</p>
             <h2 id="water-title">На волне<span>!</span></h2>
             <p>Первые старты и трюки на вейке.<br>Прогулки вдоль берега на SUP.</p>
+          </div>
+          <div class="waterstage-details">
+            <button type="button" data-activity="wake-details" aria-haspopup="dialog">Вейк <span aria-hidden="true">↗</span></button>
+            <button type="button" data-activity="sup-details" aria-haspopup="dialog">SUP <span aria-hidden="true">↗</span></button>
           </div>
           <div class="waterstage-riders" role="group" aria-label="Два райдера на воде">
             <img class="waterstage-rider waterstage-carve" data-cast="carve" src="/assets/cast/carve-still.webp" alt="Вейкбордист скользит по воде" loading="lazy">
@@ -162,7 +178,7 @@
     </section>
 
     <section id="events" class="party-photos" data-scene aria-label="Все на танцпол">
-      <div class="party-gallery" data-party-gallery aria-label="Слайдер фотографий" role="region">
+      <div class="party-gallery" data-party-gallery data-snap-gallery aria-label="Слайдер фотографий" role="region">
         <header class="party-gallery-heading">
           <h2 class="night-title" id="party-gallery-title" aria-label="Все на танцпол" aria-describedby="party-gallery-kicker">
             <span class="party-title-line"><span class="party-title-word">Все</span><span class="night-kicker" id="party-gallery-kicker">Вечеринки<br>и корпоративы</span></span>
@@ -176,13 +192,13 @@
             <button class="night-book" data-book="">Собрать компанию <span aria-hidden="true">↗</span></button>
           </div>
         </div>
-        <div class="party-gallery-track" data-party-track tabindex="0" aria-label="Листайте фотографии вечеринки">
+        <div class="party-gallery-track" data-party-track data-snap-track tabindex="0" aria-label="Листайте фотографии вечеринки">
           <img src="/assets/party-dancers.jpg" alt="Гости танцуют в красном и синем свете" loading="lazy">
           <img src="/assets/dj.jpg" alt="Диджей за пультом на ночной вечеринке" loading="lazy">
           <img src="/assets/party.jpg" alt="Гости на танцполе под красными навесами" loading="lazy">
         </div>
-        <button class="comic-gallery-arrow party-gallery-arrow party-gallery-prev" type="button" data-party-step="-1" aria-label="Предыдущее фото"></button>
-        <button class="comic-gallery-arrow party-gallery-arrow party-gallery-next" type="button" data-party-step="1" aria-label="Следующее фото"></button>
+        <button class="comic-gallery-arrow party-gallery-arrow party-gallery-prev" type="button" data-party-step="-1" data-snap-step="-1" aria-label="Предыдущее фото"></button>
+        <button class="comic-gallery-arrow party-gallery-arrow party-gallery-next" type="button" data-party-step="1" data-snap-step="1" aria-label="Следующее фото"></button>
       </div>
     </section>
 
@@ -212,6 +228,22 @@
   </footer>
 
   <dialog class="menu-dialog" id="menu-panel" aria-label="Меню сайта"><button class="close-button" data-close aria-label="Закрыть меню">×</button><span class="eyebrow">Меню</span><nav><a href="#top">Главная</a><a href="#events">События</a><a href="#place">Место</a><a href="#kitchen">Кухня</a><a href="#water">На воде</a><a href="#visit">Приехать</a></nav></dialog>
+  <dialog class="booking-dialog activity-dialog" id="wake-details" aria-labelledby="wake-details-title">
+    <button class="close-button" type="button" data-close aria-label="Закрыть подробности о вейке">×</button>
+    <div class="booking-shell">
+      <h2 id="wake-details-title">Вейк</h2>
+      <p>Первые старты и трюки на вейкборде. При записи уточним время катания и подберём оборудование.</p>
+      <button class="solid-button" type="button" data-book="Вейк">Записаться на вейк <span aria-hidden="true">↗</span></button>
+    </div>
+  </dialog>
+  <dialog class="booking-dialog activity-dialog" id="sup-details" aria-labelledby="sup-details-title">
+    <button class="close-button" type="button" data-close aria-label="Закрыть подробности о SUP">×</button>
+    <div class="booking-shell">
+      <h2 id="sup-details-title">SUP</h2>
+      <p>Прогулка вдоль берега Волкушинского карьера на доске с веслом. При записи уточним время и подберём доску.</p>
+      <button class="solid-button" type="button" data-book="SUP">Записаться на SUP <span aria-hidden="true">↗</span></button>
+    </div>
+  </dialog>
   <dialog class="booking-dialog" aria-labelledby="booking-title">
     <button class="close-button" data-close aria-label="Закрыть бронирование">×</button>
     <div class="booking-shell">
