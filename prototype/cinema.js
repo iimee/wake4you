@@ -3,7 +3,7 @@ import { setUpDancefloor } from './assets/dancefloor.js';
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const saveData = Boolean(navigator.connection?.saveData);
 const dialogs = [...document.querySelectorAll('dialog')];
-const bookingDialog = document.querySelector('.booking-dialog');
+const bookingDialog = document.querySelector('.booking-dialog:not(.activity-dialog)');
 const galleryDialog = document.querySelector('.photo-dialog');
 const filmDialog = document.querySelector('.film-dialog');
 const menuDialog = document.querySelector('.menu-dialog');
@@ -166,10 +166,9 @@ for (const image of castImages) {
   castObserver.observe(image);
 }
 
-const partyGallery = document.querySelector('[data-party-gallery]');
-if (partyGallery) {
-  const track = partyGallery.querySelector('[data-party-track]');
-  function movePartySlide(direction) {
+for (const gallery of document.querySelectorAll('[data-snap-gallery]')) {
+  const track = gallery.querySelector('[data-snap-track]');
+  function moveSlide(direction) {
     const count = track.children.length;
     const index = Math.round(track.scrollLeft / track.clientWidth);
     const next = (index + direction + count) % count;
@@ -179,13 +178,13 @@ if (partyGallery) {
       behavior:reducedMotion.matches || wraps ? 'instant' : 'smooth'
     });
   }
-  for (const button of partyGallery.querySelectorAll('[data-party-step]')) {
-    button.addEventListener('click', () => movePartySlide(Number(button.dataset.partyStep)));
+  for (const button of gallery.querySelectorAll('[data-snap-step]')) {
+    button.addEventListener('click', () => moveSlide(Number(button.dataset.snapStep)));
   }
   track.addEventListener('keydown', event => {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     event.preventDefault();
-    movePartySlide(event.key === 'ArrowLeft' ? -1 : 1);
+    moveSlide(event.key === 'ArrowLeft' ? -1 : 1);
   });
 }
 
@@ -294,9 +293,10 @@ for (const dialog of dialogs) {
   dialog.addEventListener('close', () => {
     if (dialog === filmDialog) filmDialog.querySelector('video')?.pause();
     if (dialog === menuDialog) document.querySelector('.menu-button')?.setAttribute('aria-expanded', 'false');
-    document.body.classList.toggle('modal-open', dialogs.some(item => item.open));
+    const hasOpenDialog = dialogs.some(item => item.open);
+    document.body.classList.toggle('modal-open', hasOpenDialog);
     const opener = openers.get(dialog);
-    if (opener?.isConnected) opener.focus({preventScroll: true});
+    if (!hasOpenDialog && opener?.isConnected) opener.focus({preventScroll: true});
     syncAmbientMotion();
   });
 }
@@ -317,8 +317,16 @@ menuDialog?.addEventListener('click', event => {
 });
 
 document.addEventListener('click', event => {
+  const activity = event.target.closest('[data-activity]');
+  if (activity) openDialog(document.getElementById(activity.dataset.activity), activity);
+
   const book = event.target.closest('[data-book]');
-  if (book) openBooking(book.dataset.book, book);
+  if (book) {
+    const details = book.closest('.activity-dialog[open]');
+    const opener = details ? openers.get(details) : book;
+    details?.close();
+    openBooking(book.dataset.book, opener);
+  }
 
   const photo = event.target.closest('[data-photo]');
   if (photo && galleryDialog) {
