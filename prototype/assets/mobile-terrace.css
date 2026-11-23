@@ -1,4 +1,4 @@
-.mobile-terrace-gallery,.mobile-terrace-table,.mobile-kitchen { display:none; }
+.mobile-terrace-gallery,.mobile-kitchen { display:none; }
 .terrace-feature { display:contents; }
 .terrace-feature .night-actions,.terrace-title-kicker,.terrace-intro,.party-toast { display:none; }
 
@@ -10,7 +10,7 @@
     width:100%;
     min-height:0;
     padding:0;
-    grid-template:"feature" auto "gallery" auto "album" auto "actions" auto / minmax(0,1fr);
+    grid-template:"feature" auto "gallery" auto "actions" auto / minmax(0,1fr);
     gap:0;
   }
   .terrace-feature {
@@ -64,6 +64,7 @@
     transform:skew(-2deg);
   }
   .night-social-events {
+    gap:6px;
     background:#229ed9;
     color:#071d29;
     text-decoration:none;
@@ -112,21 +113,13 @@
     line-height:1.38;
   }
 
-  .terrace-album {
-    width:100%;
-    max-width:none;
-    margin:0;
-    padding:0;
-  }
-  .terrace-album .terrace-table-photo,
-  .terrace-album .terrace-tastes { display:none; }
-  .mobile-terrace-table { display:block; width:100%; height:auto; }
+  .terrace-album { display:none; }
   .mobile-terrace-gallery {
     grid-area:gallery;
     display:block;
     position:relative;
     width:100%;
-    aspect-ratio:1;
+    aspect-ratio:4 / 3;
     isolation:isolate;
     touch-action:pan-y pinch-zoom;
   }

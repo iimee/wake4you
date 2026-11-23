@@ -5,6 +5,9 @@ import {fileURLToPath} from 'node:url';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const port=Number(process.env.PORT||4174);
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp','.mp4':'video/mp4','.svg':'image/svg+xml','.ttf':'font/ttf','.md':'text/plain; charset=utf-8'};
+types['.xml']='application/xml';
+types['.txt']='text/plain; charset=utf-8';
+types['.gif']='image/gif';
 types['.pdf']='application/pdf';
 types['.docx']='application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 http.createServer((req,res)=>{
@@ -18,7 +21,7 @@ http.createServer((req,res)=>{
   ]);
   const relative=documents.get(pagePath) ?? (pages.includes(pagePath)?'index.html':pathname.replace(/^\/+/, ''));
   const file=path.resolve(root,relative);
-  const allowed=['index.html','content.js','cinema.css','cinema.js','poster.css','chapters.js','chapters.css'].includes(relative)||relative.startsWith('assets/')||relative.startsWith('docs/');
+  const allowed=['sitemap.xml','robots.txt','index.html','content.js','cinema.css','cinema.js','poster.css','chapters.js','chapters.css'].includes(relative)||relative.startsWith('assets/')||relative.startsWith('docs/');
   if(!allowed||!file.startsWith(root+path.sep)){res.writeHead(404);return res.end('Not found');}
   fs.stat(file,(err,stat)=>{
     if(err||!stat.isFile()){res.writeHead(404);return res.end('Not found');}

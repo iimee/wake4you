@@ -81,6 +81,15 @@ const sceneObserver = new IntersectionObserver(entries => {
   }
   queueCamera();
 }, {rootMargin:'100px 0px'});
+const waterEdge = document.querySelector('.water-edge');
+if (waterEdge) {
+  const edgeObserver = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    if (motionAllowed()) waterEdge.classList.add('has-entered');
+    edgeObserver.disconnect();
+  });
+  edgeObserver.observe(waterEdge);
+}
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 for (const scene of scenes) {
   sceneObserver.observe(scene);
@@ -104,20 +113,6 @@ const mobileMotionQuery = matchMedia('(max-width: 760px)');
 const heroBackflip = document.querySelector('.hero-backflip');
 const dancefloorSection = document.querySelector('.night-party');
 const dancefloorCue = dancefloorSection?.querySelector('.night-duo');
-const shoreSequence = document.querySelector('.shore-sequence');
-const daySection = shoreSequence.querySelector('#place');
-const dayHeading = daySection.querySelector('#place-title');
-if ('ResizeObserver' in window) {
-  const updateShoreOverlap = () => {
-    if (!mobileMotionQuery.matches) return;
-    const bottom = dayHeading.getBoundingClientRect().bottom;
-    const sceneTop = daySection.getBoundingClientRect().top;
-    shoreSequence.style.setProperty('--shore-heading-end', `${Math.ceil(bottom - sceneTop)}px`);
-  };
-  const overlapObserver = new ResizeObserver(updateShoreOverlap);
-  overlapObserver.observe(dayHeading);
-  updateShoreOverlap();
-}
 let mobileDancefloorActive = false;
 
 function updateMobileMotionCue() {
@@ -350,6 +345,7 @@ function bookingStep(occasion = '') {
   bookingChoices.hidden = Boolean(occasion);
   bookingDialog.querySelector('[data-booking-step]').textContent = occasion ? '02 / Несколько деталей' : '01 / Твой день';
   bookingDialog.querySelector('#booking-title').innerHTML = occasion ? 'Собираемся<br>в Wake4You' : 'Как проведём<br>этот день?';
+  bookingDialog.querySelector('[data-water-prices]').hidden = !['Вейк', 'SUP', 'Вейк / SUP'].includes(occasion);
   if (occasion) {
     bookingForm.elements.occasion.value = occasion;
     bookingDialog.querySelector('[data-change-occasion]').textContent = `← ${occasion} · изменить`;
@@ -357,6 +353,7 @@ function bookingStep(occasion = '') {
 }
 function openBooking(occasion, button) {
   if (!bookingForm) return;
+  bookingForm.reset();
   bookingStep(occasion);
   openDialog(bookingDialog, button);
 }
@@ -371,17 +368,25 @@ document.querySelector('[data-change-occasion]')?.addEventListener('click', () =
 bookingForm?.addEventListener('submit', event => {
   event.preventDefault();
   const name = bookingForm.elements.name.value.trim();
-  const contact = bookingForm.elements.contact.value.trim();
   bookingForm.elements.name.setCustomValidity(name ? '' : 'Напиши своё имя.');
-  bookingForm.elements.contact.setCustomValidity(contact.length >= 5 ? '' : 'Оставь телефон или мессенджер.');
   if (!bookingForm.reportValidity()) return;
+  const {occasion, date, guests} = bookingForm.elements;
+  const lines = [`Здравствуйте! Меня зовут ${name}. Хочу обсудить бронирование в Wake4You.`, `Повод: ${occasion.value}.`];
+  if (date.value) lines.push(`Дата: ${date.value.split('-').reverse().join('.')}.`);
+  if (guests.value) lines.push(`Количество гостей: ${guests.value}.`);
+  const message = lines.join('\n');
+  const send = bookingDialog.querySelector('[data-send-booking]');
+  send.href = 'https://wa.me/79261017660?text=' + encodeURIComponent(message);
   bookingForm.hidden = true;
-  bookingChoices.hidden = true;
   bookingResult.hidden = false;
-  bookingDialog.querySelector('#booking-title').textContent = 'Начало положено.';
-  bookingDialog.querySelector('[data-booking-step]').textContent = 'Твой план';
-  bookingDialog.querySelector('[data-result]').textContent = `${name}, выбран формат «${bookingForm.elements.occasion.value}». В рабочем сайте команда получит эти пожелания и обсудит с тобой детали.`;
-  bookingResult.querySelector('button')?.focus();
+  bookingDialog.querySelector('#booking-title').textContent = 'Написать в парк';
+  bookingDialog.querySelector('[data-booking-step]').textContent = '03 / Твой запрос';
+  bookingDialog.querySelector('[data-result]').textContent = message;
+  send.focus();
+});
+bookingDialog.querySelector('[data-edit-booking]').addEventListener('click', () => {
+  bookingStep(bookingForm.elements.occasion.value);
+  bookingForm.elements.name.focus();
 });
 bookingForm?.addEventListener('input', event => event.target.setCustomValidity?.(''));
 if (bookingForm?.elements.date) {

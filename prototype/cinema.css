@@ -21,3 +21,11 @@ body.motion-paused *,body.motion-paused *::before,body.motion-paused *::after{an
 @media(max-width:359px){:root{--gutter:19px}.header-book{font-size:9px;gap:8px;padding:8px}.brand{width:98px;flex-basis:98px}.brand img{width:175px;height:59px;left:-34px;top:-5px}.site-header{gap:10px}.scene-copy h1{font-size:54px}.selector-tabs{gap:16px}.selector-tabs button{font-size:13px}.food-gallery .gallery-photo img{height:220px}.scene-copy h2{font-size:43px}.form-row{grid-template-columns:1fr;gap:18px}}
 @media(max-width:760px){.quick-pause{right:15px;bottom:15px;width:38px;height:38px}.scroll-cue{margin-right:45px}.footer-bottom{padding-right:35px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.scene-media>img,.scene-media>video{transform:none}.cutout-shift{transform:translate(-50%,-50%);will-change:auto}}
+
+.booking-links{display:grid;gap:10px;margin-top:20px;font-size:.88rem}
+.booking-links a,.park-contact{color:inherit;text-underline-offset:.2em}
+.booking-result [data-result]{white-space:pre-line;overflow-wrap:anywhere;line-height:1.5}
+.booking-result .solid-button{text-decoration:none}
+.booking-result .change-occasion{display:block;margin-top:16px}
+.arrival-links{flex-wrap:wrap}
+.park-contact{display:inline-flex;align-items:center;min-height:44px}

@@ -1,4 +1,5 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
+.water-edge { display:none; }
 .waterstage-backdrop { display:contents; }
 
 @media(max-width:760px) {
@@ -31,6 +32,23 @@
     background:#151712;
     border-bottom:2px solid #34717a;
     border-bottom-left-radius:91% 100%;
+  }
+  .water-edge {
+    position:absolute;
+    z-index:2;
+    display:block;
+    inset:0 0 auto;
+    height:clamp(42px,9vw,62px);
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .water-edge::after {
+    position:absolute;
+    inset:auto 0 0;
+    height:100%;
+    content:"";
+    background:#a7e5de;
+    clip-path:polygon(0 92%,12% 90%,28% 84%,46% 72%,59% 61%,68% 53%,60% 63%,46% 76%,28% 88%,12% 94%,0 98%);
   }
   .waterstage .waterstage-title { top:clamp(55px,10vw,79px); }
   .waterstage .waterstage-title > p,
@@ -98,3 +116,13 @@
   }
 }
 
+
+@media (max-width:760px) and (prefers-reduced-motion:no-preference) {
+  body:not(.motion-paused) .water-edge.has-entered::after {
+    animation:water-edge-ink .38s ease-out both;
+  }
+}
+@keyframes water-edge-ink {
+  from { mask-image:linear-gradient(90deg,#000 80%,transparent); mask-size:0% 100%; mask-repeat:no-repeat; }
+  to { mask-image:linear-gradient(90deg,#000 80%,transparent); mask-size:125% 100%; mask-repeat:no-repeat; }
+}
