@@ -2,6 +2,8 @@
 .waterstage-backdrop { display:contents; }
 
 @media(max-width:760px) {
+  #water { --party-cut-depth:clamp(27px,7vw,44px); }
+
   /*
    * Keep the existing water composition, but let it scroll as a single,
    * ordinary section on phones. The desktop sticky scene stays untouched.
@@ -9,7 +11,6 @@
   .waterstage {
     position:relative;
     min-height:0;
-    padding:0 0 18px;
     overflow:clip;
     background:linear-gradient(180deg,#172624 0%,#101b1d 100%);
   }
@@ -19,8 +20,6 @@
     top:auto;
     height:clamp(650px,88svh,810px);
     min-height:0;
-    border-radius:0 0 18px 18px;
-    box-shadow:0 24px 46px -24px #07110fe0;
   }
   .waterstage .waterstage-panorama::before {
     content:"";
@@ -39,7 +38,7 @@
     display:none;
   }
   .waterstage .waterstage-actions {
-    padding-bottom:max(18px,env(safe-area-inset-bottom));
+    padding-bottom:max(calc(var(--party-cut-depth) + 6px),env(safe-area-inset-bottom));
   }
 
   .waterstage-film {

@@ -1,5 +1,4 @@
 .hero-backflip,
-.night-intro,
 .night-ink-panel,
 .night-pair,
 .night-events { display:none; }
@@ -85,9 +84,6 @@
 
 @media (max-width:760px) {
   .shore-sequence {
-    --shore-heading-end:clamp(125px,35vw,220px);
-    --shore-cut-depth:clamp(27px,7vw,44px);
-    --shore-overlap:calc(var(--shore-heading-end) + var(--shore-cut-depth) - 1px);
     display:block;
     isolation:isolate;
     background:#0d100f;
@@ -96,36 +92,10 @@
     display:block;
     min-height:0;
     aspect-ratio:4 / 3;
-    isolation:auto;
-    overflow:visible;
-    background:none;
-    border:0;
   }
   .shore-film {
-    position:absolute;
-    inset:0 0 auto;
-    display:block;
-    width:100%;
-    height:calc(100% + var(--shore-overlap));
-    object-fit:cover;
     object-position:center 46%;
     transform:none;
-    background:#131510;
-  }
-  .shore-film,
-  .shore-hero::after {
-    mask:
-      linear-gradient(#000,#000) top / 100% calc(100% - var(--shore-cut-depth) + 1px) no-repeat,
-      url('/assets/shore-treetops.svg') bottom / 100% var(--shore-cut-depth) no-repeat;
-  }
-  .shore-hero::after {
-    position:absolute;
-    inset:100% 0 auto;
-    z-index:-2;
-    height:var(--shore-overlap);
-    content:"";
-    background:linear-gradient(transparent,#10130f9e 35%);
-    pointer-events:none;
   }
   .hero-ink,
   .hero-rip,
@@ -146,16 +116,13 @@
   .shore-hero .hero-pause { display:none; }
 
   .night-party {
-    --party-gutter:clamp(16px,5.8vw,38px);
     --party-photo-height:175.1vw;
-    --party-drop:150px;
-    --party-video-top:140px;
     --pair-width:58.3vw;
     --pair-growth:calc(var(--pair-width) * .10);
     --pair-footer-space:calc(clamp(166px,46vw,268px) + 10px);
     --pair-gallery-gap:clamp(18px,4vw,30px);
     min-height:0;
-    margin:0;
+    margin-top:calc(-1 * var(--party-cut-depth));
     isolation:isolate;
     overflow:hidden;
     background:none;
@@ -164,72 +131,44 @@
     position:relative;
     display:block;
     width:100%;
-    min-height:calc(var(--party-photo-height) + 64px + var(--party-drop) + var(--pair-growth) - var(--pair-footer-space) + var(--pair-gallery-gap));
+    min-height:calc(var(--party-photo-height) + 74px + var(--pair-growth) - var(--pair-footer-space) + var(--pair-gallery-gap));
     padding:0;
     overflow:hidden;
     isolation:isolate;
     color:#fff9ec;
   }
-  .night-party::before {
-    position:absolute;
-    inset:0 0 auto;
-    z-index:-4;
-    height:calc(var(--party-video-top) + 48px);
-    content:"";
-    background:url('/assets/dj-stage-intro.jpg') center top / 100% auto no-repeat;
-    pointer-events:none;
+  .night-party-media {
+    bottom:auto;
+    height:auto;
+    aspect-ratio:9 / 16;
+    /* The original mask contains the sky. Subtract it to reveal the treetops. */
+    mask:
+      linear-gradient(#000 calc(100% - 40px),transparent),
+      url('/assets/shore-treetops.svg') top / 100% var(--party-cut-depth) no-repeat;
+    mask-composite:subtract;
   }
   .night-party-photo,
   .night-party-film {
-    inset:var(--party-video-top) 0 auto;
-    height:auto;
-    aspect-ratio:9 / 16;
     object-fit:contain;
     object-position:center top;
-    mask-image:linear-gradient(transparent,#000 48px,#000 calc(100% - 40px),transparent);
   }
   .night-party-shade {
-    mask-image:linear-gradient(transparent,#000 76px);
+    mask-image:linear-gradient(transparent var(--party-cut-depth),#000 calc(var(--party-cut-depth) + 48px));
     background:
       linear-gradient(0deg,#0d100f calc(110px + var(--pair-growth)),#0d100ff2 calc(150px + var(--pair-growth)),#0d100f72 225px,transparent 285px),
       linear-gradient(110deg,#080e13b3 0%,#080e1355 25%,transparent 51%);
-    background-position:center 150px,center;
+    background-position:center 10px,center;
     background-repeat:no-repeat;
   }
   .night-dj-wrap,
   .night-trio,
   .night-burst { display:none; }
 
-  .night-intro {
-    position:relative;
-    z-index:3;
-    display:block;
-    padding:clamp(16px,4.3vw,32px) var(--party-gutter) 0;
-  }
-  .night-intro .hero-location { font-size:clamp(9px,2.35vw,13px); }
-  .night-intro .hero-message {
-    width:100%;
-    max-width:none;
-  }
-  .night-intro .hero-message::before { display:none; }
-  .night-intro .hero-message p {
-    width:min(45vw,280px);
-    margin:clamp(15px,4.1vw,28px) 0 0;
-    font-size:clamp(13px,3.1vw,21px);
-    line-height:1.38;
-    text-shadow:0 1px 6px #090e12;
-  }
-  .night-intro .hero-message p br { display:none; }
-  .night-intro .hero-actions .red-button {
-    margin-top:clamp(12px,3.35vw,24px);
-    padding-inline:clamp(10px,3.6vw,21px);
-    white-space:nowrap;
-  }
   .hero-backflip {
     --rider-size:min(58.8vw,450px);
     position:absolute;
     z-index:2;
-    top:calc(clamp(126px,33vw,250px) + 5px);
+    top:clamp(8px,3vw,24px);
     /* Account for the transparent edge of the animation canvas. */
     right:calc(25px - var(--rider-size) / 30);
     display:block;

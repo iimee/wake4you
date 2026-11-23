@@ -9,7 +9,7 @@
 .terrace-eyebrow::before { content:""; width:23px; height:5px; background:#ff6650; transform:skew(-22deg); }
 .terrace-copy h2 { width:fit-content; margin:22px 0; transform:rotate(-2deg); transform-origin:left; font:italic 900 clamp(58px,7.5vw,121px)/.87 Golos,Arial,sans-serif; letter-spacing:-.08em; text-transform:uppercase; }
 .terrace-copy h2 em { font:inherit; letter-spacing:inherit; color:#ffe176; }
-.terrace-copy p:last-child { max-width:34ch; font-size:clamp(16px,1.25vw,20px); line-height:1.5; }
+.terrace-copy .terrace-description { max-width:34ch; font-size:clamp(16px,1.25vw,20px); line-height:1.5; }
 .terrace-actions { grid-area:actions; align-self:start; display:flex; gap:5px 16px; flex-wrap:wrap; margin-top:22px; scroll-margin-top:24svh; }
 .terrace-actions button { display:inline-flex; align-items:center; gap:12px; min-height:45px; font-weight:600; }
 .terrace-menu { color:#181a14; background:#ffe176; padding:8px 16px; transform:skew(-3deg); }
@@ -26,7 +26,7 @@
   .terrace-copy h2 { font-size:clamp(53px,12.5vw,80px); margin:15px 0 13px; }
   .terrace-copy h2 br { display:none; }
   .terrace-copy h2 em::before { content:" "; }
-  .terrace-copy p:last-child { font-size:15px; }
+  .terrace-copy .terrace-description { font-size:15px; }
   .terrace-album { width:92%; max-width:400px; margin:0 auto; padding:0 0 26px; }
   .terrace-table-photo { aspect-ratio:1.58; padding:4px; }
   .terrace-tastes { left:-4%; bottom:0; }
