@@ -9,6 +9,7 @@
   color: #fff8e9;
   background: #20121c;
 }
+.night-party-media,
 .night-party-photo,
 .night-party-film,
 .night-party-shade {
@@ -18,9 +19,9 @@
   height: 100%;
   pointer-events: none;
 }
+.night-party-media { z-index: -3; }
 .night-party-photo,
 .night-party-film {
-  z-index: -3;
   object-fit: cover;
   object-position: center 56%;
 }
