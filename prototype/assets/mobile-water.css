@@ -1,6 +1,8 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
 .water-edge,.launch-scene,.evening-guests,.water-evening-photo,.water-glide,.water-trick { display:none; }
 .arrival-scene,.arrival-heading { display:contents; }
+.arrival-directions { display:contents; }
+.route-mobile,.arrival-transit,.destination-pin { display:none; }
 .waterstage-backdrop { display:contents; }
 
 @media(max-width:760px) {
@@ -138,7 +140,6 @@
   }
   .arrival h2 { font-size:clamp(44px,11.7vw,79px); margin:15px 0; }
   .arrival .arrival-kicker { color:#ffe176; }
-  .arrival-links .arrival-map { flex-basis:100%; max-width:22rem; }
   .arrival .park-details { margin-top:12px; }
   .arrival .park-details summary { position:relative; list-style:none; padding-right:32px; }
   .arrival .park-details summary::-webkit-details-marker { display:none; }
@@ -177,14 +178,37 @@
   .arrival-heading { display:block; position:relative; z-index:1; }
   .arrival-heading h2 { margin:9px 0 0; text-shadow:0 2px 5px #10130ee6; }
 
-  .arrival-links { margin-top:14px; }
-  .arrival-map {
-    min-height:48px;
-    padding:0 15px;
-    background:#ffe064;
-    color:#182120;
-    font-size:.88rem;
-    font-weight:750;
+  .arrival-directions {
+    position:relative; display:grid; grid-template-columns:minmax(0,1fr) auto;
+    align-items:start; gap:16px 8px; margin:-18px calc(0px - var(--gutter)) 0;
+    padding:24px var(--gutter) 10px; background:#f4e8ca; color:#182120;
+  }
+  .arrival-directions::before {
+    content:""; position:absolute; inset:-9px 0 100%; background:inherit;
+    clip-path:polygon(0 100%,100% 0,100% 100%);
+  }
+  .arrival-directions address { font-size:.85rem; line-height:1.45; }
+  .destination-name { font:italic 850 clamp(20px,5.5vw,33px)/1.15 Golos,Arial,sans-serif; letter-spacing:-.04em; }
+  .destination-brand,.arrival .route-desktop { display:none; }
+  .route-mobile { display:inline; }
+  .destination-pin {
+    display:inline-flex; align-items:center; min-height:44px; font-size:.9rem;
+    font-weight:700; color:inherit; text-decoration:underline; text-underline-offset:4px;
+  }
+  .arrival-links {
+    grid-column:1/-1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:4px 8px; margin:0;
+  }
+  .arrival-links .arrival-map,.arrival-transit {
+    display:flex; justify-content:space-between; align-items:center; min-height:48px;
+    gap:3px; padding:8px clamp(8px,2.7vw,16px); border:1.5px solid #182120;
+    background:#ffe064; color:#182120; transform:none; text-decoration:none;
+    font-size:clamp(.83rem,3.6vw,1rem); font-weight:750;
+  }
+  .arrival-transit { background:transparent; }
+  .arrival-links .park-contact { width:fit-content; font-size:.88rem; text-decoration:underline; }
+  .arrival-directions a:focus-visible {
+    outline:3px solid #07558c; outline-offset:2px;
   }
   .harbor-nav { grid-template-columns:1fr auto; min-height:68px; }
   .harbor-nav nav { display:none; }
