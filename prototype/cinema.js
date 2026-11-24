@@ -81,15 +81,14 @@ const sceneObserver = new IntersectionObserver(entries => {
   }
   queueCamera();
 }, {rootMargin:'100px 0px'});
-const waterEdge = document.querySelector('.water-edge');
-if (waterEdge) {
-  const edgeObserver = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    if (motionAllowed()) waterEdge.classList.add('has-entered');
-    edgeObserver.disconnect();
-  });
-  edgeObserver.observe(waterEdge);
-}
+const sceneAccents = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    if (motionAllowed()) entry.target.classList.add('has-entered');
+    sceneAccents.unobserve(entry.target);
+  }
+}, {threshold:.45});
+document.querySelectorAll('.water-edge, .kitchen-server').forEach(el => sceneAccents.observe(el));
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 for (const scene of scenes) {
   sceneObserver.observe(scene);

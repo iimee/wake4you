@@ -19,7 +19,7 @@
     position:relative;
     isolation:isolate;
     top:auto;
-    height:clamp(650px,88svh,810px);
+    height:clamp(405px,118vw,715px);
     min-height:0;
   }
   .waterstage .waterstage-panorama::before {
@@ -29,9 +29,9 @@
     inset:0 0 auto;
     height:clamp(42px,9vw,62px);
     pointer-events:none;
-    background:#151712;
-    border-bottom:2px solid #34717a;
-    border-bottom-left-radius:91% 100%;
+    background:#f4e8ca;
+    border-bottom:0;
+    clip-path:polygon(0 0,100% 0,100% 18%,82% 25%,66% 37%,47% 55%,28% 76%,13% 90%,0 100%);
   }
   .water-edge {
     position:absolute;
@@ -48,7 +48,7 @@
     height:100%;
     content:"";
     background:#a7e5de;
-    clip-path:polygon(0 92%,12% 90%,28% 84%,46% 72%,59% 61%,68% 53%,60% 63%,46% 76%,28% 88%,12% 94%,0 98%);
+    clip-path:polygon(0 99%,13% 89%,28% 75%,47% 54%,66% 36%,82% 24%,93% 21%,81% 28%,65% 42%,46% 61%,28% 81%,12% 94%,0 100%);
   }
   .waterstage .waterstage-title { top:clamp(55px,10vw,79px); }
   .waterstage .waterstage-title > p,
@@ -60,9 +60,14 @@
   }
 
   .waterstage-film {
-    object-position:24% 51%;
+    object-position:61% 52%;
   }
   .waterstage-riders { translate:-5px 0; }
+  .waterstage .waterstage-foreground { width:135%; left:-24%; bottom:-11vw; }
+  .waterstage .waterstage-carve { left:8%; bottom:39%; width:clamp(82px,25vw,157px); }
+  .waterstage .waterstage-jump { right:2%; bottom:26%; width:clamp(147px,51vw,335px); }
+  .waterstage .waterstage-title h2 { margin-top:0; color:#ffe064; font-size:clamp(56px,14vw,98px); }
+
   .waterstage-actions .water-label { display:none; }
   .waterstage-actions .water-short { display:inline; }
 
@@ -89,7 +94,21 @@
   .waterstage-actions>div [data-photo] { display:none; }
 
   .arrival-pier,.arrival-note,.arrival-photo,.arrival::before { display:none; }
-  .arrival { min-height:0; border-top:4px solid #ffe064; background:#191b18; }
+  .arrival {
+    min-height:0; border:0; margin-top:-15px; position:relative; z-index:1;
+    background:#181d1a; clip-path:polygon(0 15px,100% 0,100% 100%,0 100%);
+  }
+  .arrival h2 { font-size:clamp(44px,11.7vw,79px); margin:15px 0; }
+  .arrival .arrival-kicker { color:#ffe176; }
+  .arrival-links .arrival-map { flex-basis:100%; max-width:22rem; }
+  .arrival .park-details { margin-top:12px; }
+  .arrival .park-details summary { position:relative; list-style:none; padding-right:32px; }
+  .arrival .park-details summary::-webkit-details-marker { display:none; }
+  .arrival .park-details summary::after {
+    content:"+"; position:absolute; right:4px; color:#ffe176; font:500 1.25rem/1 Golos,Arial,sans-serif;
+  }
+  .arrival .park-details [open]>summary::after { content:"−"; }
+
   .arrival-inner { padding-block:34px 30px; }
   .arrival-links { margin-top:14px; }
   .arrival-map {
@@ -124,5 +143,6 @@
 }
 @keyframes water-edge-ink {
   from { mask-image:linear-gradient(90deg,#000 80%,transparent); mask-size:0% 100%; mask-repeat:no-repeat; }
-  to { mask-image:linear-gradient(90deg,#000 80%,transparent); mask-size:125% 100%; mask-repeat:no-repeat; }
+  75% { opacity:1; }
+  to { opacity:0; mask-image:linear-gradient(90deg,#000 80%,transparent); mask-size:125% 100%; mask-repeat:no-repeat; }
 }
