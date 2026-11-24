@@ -45,7 +45,8 @@
     display:grid;
     align-self:flex-start;
     gap:6px;
-    margin-top:auto;
+    margin-top:clamp(8px,2.3vw,20px);
+    justify-items:start;
   }
   .terrace-feature .night-book,
   .night-social-events {
@@ -61,7 +62,7 @@
     position:relative;
     inset:auto;
     grid-row:auto;
-    justify-self:stretch;
+    justify-self:start;
     margin:0;
     transform:skew(-2deg);
   }
@@ -84,7 +85,7 @@
   .terrace-copy {
     align-self:stretch;
     z-index:2;
-    margin-bottom:12px;
+    margin-bottom:0;
   }
   .terrace-copy h2 { font-size:clamp(37px,11.5vw,80px); margin:0 0 14px; }
   .terrace-eyebrow { display:none; }
@@ -123,7 +124,6 @@
   .event-inquiry { display:inline-flex; align-items:center; min-height:44px; gap:8px; color:#fff6df; font-size:.92rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
   .booking-shell>.booking-prices { margin:10px 0 18px; font-size:.9rem; }
   .booking-prices[data-activity="Вейк"] [data-rate="sup"],.booking-prices[data-activity="SUP"] [data-rate="wake"] { display:none; }
-  .terrace-intro .hero-actions { order:1; }
   .terrace-intro p {
     margin:0;
     max-width:min(43vw,270px);
@@ -227,10 +227,24 @@
     justify-self:start; min-height:45px; margin-left:var(--gutter);
     padding:8px 17px; gap:22px; background:#1d241e; color:#fff3d7;
   }
-  .mobile-terrace-gallery::before {
-    content:""; position:absolute; inset:-5px 0 auto; height:12px; z-index:1;
-    background:#f2d16d; clip-path:polygon(0 52%,70% 0,100% 14%,39% 68%,9% 100%);
-    pointer-events:none;
+  .mobile-terrace-gallery {
+    margin-top:clamp(-28px,-4vw,-12px);
+    clip-path:polygon(0 5%,100% 0,100% 100%,0 100%);
+  }
+  .table-service { display:none; }
+  [data-table-scene] .table-service {
+    position:absolute; display:block; pointer-events:none;
+    bottom:1%; right:7%; height:78%; aspect-ratio:228 / 300;
+  }
+  .table-service i {
+    display:block; height:100%; transform:scaleX(-1);
+    background:url('/assets/cast/serving-strip.webp') 100% center / 400% 100% no-repeat;
+  }
+  /* The tabletop and its place settings sit in front of the server. */
+  [data-table-scene]::after {
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:url('/assets/table.jpg') center top / cover;
+    clip-path:polygon(0 74%,32% 67%,62% 61%,75% 61%,51% 94%,51% 100%,0 100%);
   }
   .terrace-actions .terrace-hall { display:none; }
 }
@@ -238,3 +252,10 @@
 @media(prefers-reduced-motion:reduce) {
   .mobile-terrace-frame img { transition:none; }
 }
+
+@media(max-width:760px) and (prefers-reduced-motion:no-preference) {
+  body:not(.motion-paused) [data-table-scene].has-entered .table-service { animation:approach-table 1.2s ease-out both; }
+  body:not(.motion-paused) [data-table-scene].has-entered .table-service i { animation:table-footsteps .6s steps(3,end) 2; }
+}
+@keyframes approach-table { from { translate:28% 0; } to { translate:0 0; } }
+@keyframes table-footsteps { from { background-position:0% center; } to { background-position:100% center; } }

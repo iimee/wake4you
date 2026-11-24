@@ -88,7 +88,7 @@ const sceneAccents = new IntersectionObserver(entries => {
     sceneAccents.unobserve(entry.target);
   }
 }, {threshold:.45});
-document.querySelectorAll('.water-edge').forEach(el => sceneAccents.observe(el));
+document.querySelectorAll('.water-edge, .mobile-terrace-frame').forEach(el => sceneAccents.observe(el));
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 for (const scene of scenes) {
   sceneObserver.observe(scene);
