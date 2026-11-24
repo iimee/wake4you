@@ -192,7 +192,7 @@
   .mobile-kitchen {
     position:relative;
     display:grid;
-    grid-template:var(--grill-height) auto / 1fr;
+    grid-template:var(--grill-height) clamp(110px,33vw,190px) auto / minmax(0,1fr);
     isolation:isolate;
     color:#211e18;
   }
@@ -205,25 +205,37 @@
     position:absolute; inset:0 auto 0 0; width:34%; height:100%; object-fit:cover;
     object-position:58% center; clip-path:polygon(0 0,100% 0,65% 100%,0 100%);
   }
+  .grill-stage::before {
+    content:""; position:absolute; inset:0 auto 0 0; width:35.2%;
+    background:#fff2d2; clip-path:polygon(0 0,100% 0,65% 100%,0 100%);
+  }
   .grill-chef { position:absolute; height:85%; width:auto; max-width:65%; object-fit:contain; right:1%; bottom:5%; }
   .mobile-kitchen-gallery {
-    grid-area:2 / 1; align-self:center; justify-self:end; position:relative;
-    width:33%; height:clamp(75px,23vw,139px); margin-right:3%;
+    grid-area:2 / 1; position:relative; isolation:isolate; overflow:hidden;
+    margin:-2.5vw 0 0; background:#211e18;
+    clip-path:polygon(0 2.5vw,100% 0,100% calc(100% - 1.5vw),0 100%);
   }
   .mobile-kitchen-gallery img {
-    position:absolute; width:66%; aspect-ratio:1; object-fit:cover;
-    border:3px solid #fff4dc; transform:rotate(-7deg);
+    position:absolute; bottom:3px; top:4px; height:calc(100% - 7px); object-fit:cover;
   }
-  .mobile-kitchen-gallery img:last-child { bottom:0; right:0; width:57%; transform:rotate(6deg); }
+  .mobile-kitchen-gallery img:first-child {
+    left:0; width:63%; object-position:50% 59%;
+    clip-path:polygon(0 0,100% 0,80% 100%,0 100%);
+  }
+  .mobile-kitchen-gallery img:last-child {
+    right:0; width:50%; object-position:50% 25%;
+    clip-path:polygon(27% 0,100% 0,100% 100%,2% 100%);
+  }
   .mobile-kitchen h3 {
-    grid-area:1 / 1; position:relative; align-self:end; justify-self:start; margin:0 0 0 var(--gutter);
-    padding:.02em .15em .08em .05em;
+    grid-area:1 / 1; position:relative; z-index:1; align-self:end; justify-self:start; margin:0 0 -.12em var(--gutter);
+    padding:.025em .24em .09em .11em;
     font:italic 900 clamp(58px,16vw,100px)/.89 Golos,Arial,sans-serif;
     color:#ffdf56; background:#191b17; letter-spacing:-.085em; text-transform:uppercase;
     transform:rotate(-3deg); transform-origin:left bottom;
+    clip-path:polygon(1% 5%,100% 0,96% 86%,100% 91%,0 100%);
   }
   .mobile-kitchen-copy {
-    grid-area:2 / 1; max-width:38ch; margin:18px 39% 17px var(--gutter);
+    grid-area:3 / 1; max-width:42ch; margin:15px var(--gutter) 13px;
     font-size:clamp(.94rem,3.6vw,1.15rem); line-height:1.43;
   }
   .terrace-actions .terrace-menu {
