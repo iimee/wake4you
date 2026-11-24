@@ -263,13 +263,15 @@
   <dialog class="booking-dialog" aria-labelledby="booking-title">
     <button class="close-button" data-close aria-label="Закрыть бронирование">×</button>
     <div class="booking-shell">
-      <p class="eyebrow" data-booking-step>01 / Твой день</p>
-      <h2 id="booking-title">Как проведём<br>этот день?</h2>
+      <header class="booking-cover">
+        <p class="eyebrow" data-booking-step>01 / Твой день</p>
+        <h2 id="booking-title">Как проведём<br>этот день?</h2>
+      </header>
       <div class="booking-choices"><button data-choose="День у воды">Просто отдохнуть <span>↗</span></button><button data-choose="Корпоратив">Собрать команду <span>↗</span></button><button data-choose="Вечеринка">Устроить вечеринку <span>↗</span></button><button data-choose="День рождения">Отметить день рождения <span>↗</span></button><button data-choose="Кухня">Собраться за столом <span>↗</span></button><button data-choose="Вейк / SUP">Выйти на воду <span>↗</span></button></div>
       <form id="booking-form" hidden>
         <button class="change-occasion" type="button" data-change-occasion>← Изменить повод</button>
         <input name="occasion" type="hidden">
-        <div class="form-row"><label>Как тебя зовут<input name="name" placeholder="Имя" autocomplete="given-name" required maxlength="80"></label><label>Когда удобно<input name="date" type="date" aria-label="Желаемая дата, необязательно"></label></div>
+        <div class="form-row"><label>Как тебя зовут<input name="name" placeholder="Имя" autocomplete="given-name" required maxlength="80"></label><label><span>Когда удобно <span class="booking-optional">необязательно</span></span><input name="date" type="date" aria-label="Желаемая дата, необязательно"></label></div>
         <label>Сколько вас будет <span class="optional">необязательно</span><select name="guests"><option value="">Выбрать</option><option>До 10</option><option>10–30</option><option>30–50</option><option>Больше 50</option></select></label>
         <button type="submit" class="solid-button">Подготовить сообщение <span>↗</span></button>
         <p class="demo-note">Дату и стоимость подтвердит администратор.</p>

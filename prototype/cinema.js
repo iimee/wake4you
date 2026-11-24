@@ -423,6 +423,7 @@ mobileMotionQuery.addEventListener('change', placeWaterPrices);
 
 function bookingStep(occasion = '') {
   if (!bookingDialog) return;
+  bookingDialog.dataset.occasion = occasion;
   bookingResult.hidden = true;
   bookingForm.hidden = !occasion;
   bookingChoices.hidden = Boolean(occasion);
@@ -439,6 +440,7 @@ function bookingStep(occasion = '') {
 function openBooking(occasion, button) {
   if (!bookingForm) return;
   bookingForm.reset();
+  bookingForm.elements.name.setCustomValidity('');
   bookingStep(occasion);
   openDialog(bookingDialog, button);
 }

@@ -200,3 +200,54 @@ html { scroll-padding-top: var(--nav-height); }
 .booking-prices caption { text-align:left; padding-bottom:.5rem; }
 .booking-prices th,.booking-prices td { padding:.55rem .1rem; border-bottom:1px solid currentColor; text-align:right; }
 .booking-prices th:first-child { text-align:left; }
+.booking-cover { display:contents; }
+.booking-cover>.eyebrow { color:var(--muted); }
+.booking-optional { display:none; }
+
+@media(max-width:760px) {
+  .booking-dialog {
+    --booking-photo:url('/assets/table.jpg'); --panel:#f4e8ca; --cream:#182120;
+    --muted:#495047; --line:#18212044; color-scheme:light;
+    width:min(100%,540px); max-width:100%; max-height:92dvh; margin:auto auto 0;
+    border:0; background:var(--panel); color:var(--cream);
+  }
+  .booking-dialog:is([data-occasion="Корпоратив"],[data-occasion="Вечеринка"],[data-occasion="День рождения"]) { --booking-photo:url('/assets/party-wide.jpg'); }
+  .booking-dialog:is([data-occasion="Вейк"],[data-occasion="Вейк / SUP"]) { --booking-photo:url('/assets/wake-water.jpg'); }
+  .booking-dialog[data-occasion="SUP"] { --booking-photo:url('/assets/sup-water.jpg'); }
+  .booking-dialog[data-occasion="Кухня"] { --booking-photo:url('/assets/food.jpg'); }
+  .booking-shell { --inset:clamp(16px,5vw,28px); padding:0 var(--inset) max(14px,env(safe-area-inset-bottom)); }
+  .booking-cover {
+    display:grid; align-content:end; gap:6px; padding:30px 55px 21px var(--inset);
+    min-height:132px; margin:0 calc(-1 * var(--inset)) 12px;
+    background:linear-gradient(88deg,#0a1410e8,#10161193 65%,#10161118),var(--booking-photo) center 52% / cover;
+    clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),0 100%);
+  }
+  .booking-cover>.eyebrow { color:#ffe064; font-size:.69rem; font-weight:650; }
+  .booking-cover h2 {
+    margin:0; color:#fff9eb; font:italic 900 clamp(30px,8vw,42px)/.94 Golos,Arial,sans-serif;
+    letter-spacing:-.05em; text-transform:uppercase;
+  }
+  .booking-dialog .close-button { background:#161e19; color:#fff9eb; }
+  .booking-dialog :focus-visible { outline:2px solid #08728e; outline-offset:2px; }
+  .booking-choices { display:block; border-top:0; }
+  .booking-choices>button {
+    width:100%; min-height:46px; padding:9px 2px; font-size:.97rem; font-weight:700; color:inherit;
+  }
+  .booking-choices>button:nth-child(odd) { border-right:0; }
+  .booking-choices>button:hover { background:#eaddb8; }
+  .booking-choices span { font-weight:500; font-size:1rem; }
+  .booking-shell form { gap:12px; }
+  .booking-shell .form-row { grid-template-columns:1fr; gap:12px; }
+  .booking-shell label { gap:4px; font-size:.85rem; font-weight:650; }
+  .booking-shell input,.booking-shell select {
+    padding:9px 11px; background:#fffaeb; border:1px solid #777b6d; min-height:44px;
+  }
+  .booking-shell label:has(select) { display:block; }
+  .booking-shell select { display:block; margin-top:4px; }
+  .booking-optional,.booking-shell .optional { display:inline; color:var(--muted); font-size:.75rem; font-weight:450; }
+  .booking-shell .solid-button { width:100%; min-height:48px; background:#ffe064; border:1px solid #182120; color:#182120; font-weight:750; font-size:.95rem; }
+  .booking-shell .change-occasion,.booking-shell .demo-note { color:var(--muted); font-size:.8rem; }
+  .booking-shell .booking-links { margin-top:12px; }
+  .booking-links>a { display:flex; align-items:center; min-height:44px; text-decoration:underline; }
+  .booking-result>[data-result] { padding:14px; margin:14px 0; background:#fff9e9; border-left:3px solid #182120; font-size:.95rem; }
+}
