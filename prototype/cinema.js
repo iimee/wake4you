@@ -42,6 +42,7 @@ function motionAllowed() {
 const scenes = [...document.querySelectorAll('[data-scene]')];
 const activeScenes = new Set();
 const launchScene = document.querySelector('.launch-scene');
+const terraceOpening = document.querySelector('.terrace-feature');
 let cameraFrame = 0;
 let previousScroll = window.scrollY;
 let inkSlip = 0;
@@ -60,6 +61,15 @@ function drawCamera() {
   if (Math.abs(inkSlip) < .015) inkSlip = 0;
   for (const scene of activeScenes) {
     const box = scene.getBoundingClientRect();
+    if (scene === terraceOpening) {
+      if (mobileMotionQuery.matches) {
+        const distance = Math.min(height * .48, box.height * .55);
+        const start = Math.max(0, scrollY + box.top - height * .75);
+        const reveal = Math.max(0, Math.min(1, (scrollY - start) / distance));
+        scene.style.setProperty('--terrace-reveal', reveal.toFixed(4));
+      }
+      continue;
+    }
     if (scene === launchScene) {
       // Match her stride to distance travelled. A stopped scroll holds the pose.
       const walk = Math.max(0, Math.min(1, (height - box.top - box.height * .7) / (height * .52)));

@@ -4,7 +4,11 @@
 .terrace-feature .night-actions,.terrace-title-kicker,.terrace-intro,.party-toast { display:none; }
 
 @media(max-width:760px) {
-  .terrace-scene { isolation:auto; background:none; }
+  .terrace-scene {
+    --welcome-height:clamp(425px,110vw,645px);
+    --film-overlap:clamp(250px,64vw,330px);
+    margin-top:calc(0px - var(--film-overlap)); isolation:isolate; background:none;
+  }
   .terrace-scene::before { content:none; }
   .terrace-layout.wrap {
     position:relative;
@@ -20,15 +24,17 @@
     display:flex;
     flex-direction:column;
     overflow:hidden;
-    min-height:clamp(425px,110vw,645px);
+    min-height:var(--welcome-height);
+    --uncovered:calc(1 - var(--terrace-reveal,0));
     isolation:isolate;
-    background:#242419;
+    background:transparent;
     padding:clamp(16px,5vw,30px) var(--gutter) clamp(14px,3.6vw,24px);
   }
   .terrace-feature .terrace-landscape {
     z-index:-3;
     transform:none;
     object-position:60% 58%;
+    clip-path:polygon(0 0,57% calc(var(--film-overlap) * .88 * var(--uncovered)),100% calc(7px + (var(--film-overlap) - 7px) * var(--uncovered)),100% 100%,0 100%);
   }
   .terrace-feature::before {
     position:absolute;
@@ -37,6 +43,7 @@
     content:"";
     background:linear-gradient(90deg,#0c1010bd,transparent 72%),
       linear-gradient(0deg,#14160c50,transparent 42%,#13171040);
+    mask-image:linear-gradient(180deg,transparent,#000 clamp(24px,6vw,45px));
     pointer-events:none;
   }
   .terrace-feature .night-actions {
@@ -75,12 +82,15 @@
   .party-toast {
     position:absolute;
     z-index:1;
-    bottom:clamp(24px,7vw,56px);
+    --toast-width:min(63vw,455px);
+    bottom:clamp(13px,3.6vw,26px);
     right:-4px;
     display:block;
-    width:min(63vw,455px);
+    width:var(--toast-width);
     height:auto;
     pointer-events:none;
+    transform-origin:85% bottom;
+    transform:scale(calc(1 + .06 * var(--uncovered)));
   }
   .terrace-copy {
     align-self:stretch;
@@ -108,7 +118,7 @@
   .terrace-copy h2,.terrace-copy p { text-shadow:0 2px 9px #151610e0; }
   .terrace-description { display:none; }
   .terrace-intro { display:grid; gap:clamp(10px,3vw,18px); }
-  .terrace-intro .hero-location { max-width:none; font-size:clamp(11px,2.8vw,12px); }
+  .terrace-intro .hero-location { max-width:49vw; font-size:clamp(11px,2.8vw,12px); }
   .terrace-dance-link { display:inline-flex; gap:6px; align-items:center; min-height:44px; color:#fff9e9; text-decoration:underline; text-underline-offset:4px; font-weight:650; }
   .terrace-actions button.terrace-menu { display:none; }
   .terrace-actions .mobile-menu-request { display:inline-flex; align-items:center; font-weight:650; text-decoration:none; }
@@ -239,7 +249,12 @@
   .terrace-actions .terrace-hall { display:none; }
 }
 
+@media(max-width:360px) {
+  .party-toast { --toast-width:58vw; }
+}
+
 @media(prefers-reduced-motion:reduce) {
+  .terrace-feature { --uncovered:.48; }
   .mobile-terrace-frame img { transition:none; }
 }
 
