@@ -19,7 +19,7 @@
     position:relative;
     isolation:isolate;
     top:auto;
-    height:clamp(535px,147vw,845px);
+    height:clamp(535px,147vw,1050px);
     min-height:0;
   }
   .waterstage .waterstage-panorama::before {
@@ -50,13 +50,23 @@
     background:#a7e5de;
     clip-path:polygon(0 99%,13% 89%,28% 75%,47% 54%,66% 36%,82% 24%,93% 21%,81% 28%,65% 42%,46% 61%,28% 81%,12% 94%,0 100%);
   }
-  .launch-scene { position:absolute; inset:0 0 auto; height:48%; display:block; pointer-events:none; }
-  .launch-scene::before {
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(100deg,#122522b5,transparent 70%),url('/assets/wake-water.jpg') center 63% / cover;
-    clip-path:polygon(0 0,100% 0,100% 87%,0 100%);
+  .launch-scene {
+    position:absolute; inset:0 0 auto; height:48%; display:block; overflow:hidden;
+    pointer-events:none; clip-path:polygon(0 0,100% 0,100% 87%,0 100%);
   }
-  .launch-paddler { position:absolute; height:83%; width:54%; object-fit:contain; object-position:right bottom; right:2%; bottom:2%; }
+  /* Foot positions are coordinates on the original 3:4 photograph of the ramp. */
+  .launch-dock {
+    position:absolute; width:100%; aspect-ratio:3 / 4; bottom:-6vw;
+    background:linear-gradient(100deg,#1225229c,transparent 66%),url('/assets/wake-water.jpg') center / cover;
+  }
+  .launch-paddler {
+    --walk:var(--launch-walk,1);
+    position:absolute; display:block; width:clamp(106px,34%,190px); aspect-ratio:349 / 520;
+    left:calc(84% - 22% * var(--walk)); top:calc(87% - 17.5% * var(--walk));
+    transform:translate(-50%,-100%) scale(calc(1 - .47 * var(--walk))) scaleX(-1);
+    transform-origin:center bottom;
+    background:url('/assets/cast/sup-stride.webp') var(--launch-pose,50%) center / 300% 100% no-repeat;
+  }
   .waterstage .waterstage-title { top:clamp(55px,10vw,79px); max-width:47%; }
   .waterstage .waterstage-title > p,
   .waterstage .waterstage-actions > p {
@@ -130,11 +140,16 @@
   .harbor-nav nav { display:none; }
 }
 
+@media(max-width:360px) {
+  .waterstage .waterstage-title h2 { font-size:12.5vw; }
+}
+
 @media(max-width:390px) {
   .waterstage-actions>div button { padding-inline:8px; font-size:.8rem; }
 }
 
 @media(prefers-reduced-motion:reduce) {
+  .launch-paddler { --walk:1; --launch-pose:50%; }
   .waterstage .waterstage-film,
   .waterstage .waterstage-foreground,
   .waterstage .waterstage-rider {

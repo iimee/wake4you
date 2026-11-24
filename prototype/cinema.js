@@ -41,6 +41,7 @@ function motionAllowed() {
 // Move the camera only while a scene is on screen. Native scroll remains in control.
 const scenes = [...document.querySelectorAll('[data-scene]')];
 const activeScenes = new Set();
+const launchScene = document.querySelector('.launch-scene');
 let cameraFrame = 0;
 let previousScroll = window.scrollY;
 let inkSlip = 0;
@@ -59,6 +60,14 @@ function drawCamera() {
   if (Math.abs(inkSlip) < .015) inkSlip = 0;
   for (const scene of activeScenes) {
     const box = scene.getBoundingClientRect();
+    if (scene === launchScene) {
+      // Match her stride to distance travelled. A stopped scroll holds the pose.
+      const walk = Math.max(0, Math.min(1, (height - box.top - box.height * .7) / (height * .52)));
+      const stride = Math.floor(walk * 8 + 1) % 4;
+      scene.style.setProperty('--launch-walk', walk.toFixed(4));
+      scene.style.setProperty('--launch-pose', Math.min(stride, 4 - stride) * 50 + '%');
+      continue;
+    }
     const progress = Math.max(-1, Math.min(1, (height - box.height - 2 * box.top) / (height + box.height)));
     scene.style.setProperty('--scene-progress', progress.toFixed(4));
     if (mobileMotionQuery.matches && scene.hasAttribute('data-comic-drift')) {
