@@ -112,16 +112,6 @@
   .terrace-dance-link { display:inline-flex; gap:6px; align-items:center; min-height:44px; color:#fff9e9; text-decoration:underline; text-underline-offset:4px; font-weight:650; }
   .terrace-actions button.terrace-menu { display:none; }
   .terrace-actions .mobile-menu-request { display:inline-flex; align-items:center; font-weight:650; text-decoration:none; }
-  .party-invitations {
-    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
-    gap:10px; position:relative; isolation:isolate; min-height:clamp(195px,56vw,345px);
-    padding:20px 51% 24px var(--gutter);
-    background:linear-gradient(90deg,#111615f5,#141312a8 48%,transparent 80%),url('/assets/party-wide.jpg') center 64% / cover;
-  }
-  .evening-guests { position:absolute; z-index:-1; right:0; bottom:5%; width:52%; height:88%; object-fit:contain; object-position:center bottom; pointer-events:none; }
-
-  .party-invitations .night-social-events { width:fit-content; }
-  .event-inquiry { display:inline-flex; align-items:center; min-height:44px; gap:8px; color:#fff6df; font-size:.92rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
   .booking-shell>.booking-prices { margin:10px 0 18px; font-size:.9rem; }
   .booking-prices[data-activity="Вейк"] [data-rate="sup"],.booking-prices[data-activity="SUP"] [data-rate="wake"] { display:none; }
   .terrace-intro p {

@@ -1,5 +1,6 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
-.water-edge,.launch-scene { display:none; }
+.water-edge,.launch-scene,.evening-guests { display:none; }
+.arrival-scene,.arrival-heading { display:contents; }
 .waterstage-backdrop { display:contents; }
 
 @media(max-width:760px) {
@@ -112,8 +113,9 @@
 
   .arrival-pier,.arrival-note,.arrival-photo,.arrival::before { display:none; }
   .arrival {
-    min-height:0; border:0; margin-top:-15px; position:relative; z-index:1;
-    background:#181d1a; clip-path:polygon(0 15px,100% 0,100% 100%,0 100%);
+    min-height:0; border:0; margin-top:-14px; position:relative; z-index:1;
+    background:#181d1a; clip-path:polygon(0 14px,100% 0,100% 100%,0 100%);
+
   }
   .arrival h2 { font-size:clamp(44px,11.7vw,79px); margin:15px 0; }
   .arrival .arrival-kicker { color:#ffe176; }
@@ -126,7 +128,36 @@
   }
   .arrival .park-details [open]>summary::after { content:"−"; }
 
-  .arrival-inner { padding-block:34px 30px; }
+  .arrival-inner { padding-block:0 30px; }
+  .arrival-scene {
+    --reveal:clamp(0,calc((var(--scene-progress,0) + .64) * 1.55),1);
+    display:grid; position:relative; isolation:isolate; align-content:space-between;
+    min-height:clamp(315px,92vw,550px); margin:0 calc(0px - var(--gutter)) 18px;
+    padding:clamp(29px,8vw,50px) var(--gutter) clamp(15px,4vw,27px);
+    background:linear-gradient(0deg,#111815d6,transparent 54%),url('/assets/deck-night.jpg') 58% 65% / cover;
+  }
+  .arrival-scene::before {
+    content:""; position:absolute; z-index:-1; inset:0; pointer-events:none;
+    background:linear-gradient(95deg,#0c1012c9,transparent 80%),url('/assets/party-wide.jpg') 56% 55% / cover;
+    clip-path:polygon(0 0,100% 0,100% calc(79% - 53% * var(--reveal)),0 calc(98% - 28% * var(--reveal)));
+  }
+  .party-invitations {
+    display:grid; justify-items:start; align-content:start; gap:8px;
+    width:fit-content; max-width:49%; position:relative; z-index:1;
+  }
+  .event-inquiry {
+    display:inline-flex; align-items:center; min-height:44px; gap:8px; color:#fff6df;
+    font-size:.92rem; font-weight:650; text-decoration:underline; text-underline-offset:4px;
+    text-shadow:0 1px 4px #111;
+  }
+  .arrival-scene .night-social-events { padding-inline:10px; white-space:normal; }
+  .evening-guests {
+    display:block; position:absolute; z-index:0; right:1%; bottom:28%;
+    width:clamp(153px,52%,350px); height:auto; pointer-events:none;
+  }
+  .arrival-heading { display:block; position:relative; z-index:1; }
+  .arrival-heading h2 { margin:9px 0 0; text-shadow:0 2px 5px #10130ee6; }
+
   .arrival-links { margin-top:14px; }
   .arrival-map {
     min-height:48px;
@@ -149,6 +180,7 @@
 }
 
 @media(prefers-reduced-motion:reduce) {
+  .arrival-scene { --reveal:1; }
   .launch-paddler { --walk:1; --launch-pose:50%; }
   .waterstage .waterstage-film,
   .waterstage .waterstage-foreground,
