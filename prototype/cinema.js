@@ -47,12 +47,43 @@ const launchScene = document.querySelector('.launch-scene');
 const waterStage = document.querySelector('.waterstage');
 const eventSection = document.querySelector('#events');
 const terraceOpening = document.querySelector('.terrace-feature');
+const grillChef = document.querySelector('.grill-chef');
+let chefReady = false;
 let cameraFrame = 0;
 let previousScroll = window.scrollY;
 let inkSlip = 0;
 
 function queueCamera() {
   if (!cameraFrame && motionAllowed()) cameraFrame = requestAnimationFrame(drawCamera);
+}
+
+function phase(position, start, end) {
+  return Math.max(0, Math.min(1, (position - start) / (end - start)));
+}
+
+function waterPosition(height) {
+  const box = waterStage.getBoundingClientRect();
+  return (height * .61 - box.top) / box.height;
+}
+
+function setRiderFrame(name, progress) {
+  const frame = Math.min(7, Math.floor(progress * 8));
+  waterStage.style.setProperty('--' + name + '-x', (frame % 4) * 100 / 3 + '%');
+  waterStage.style.setProperty('--' + name + '-y', frame < 4 ? '0%' : '100%');
+}
+
+function updateWaterMotion(position) {
+  // One reading line passes the launch ramp, the far rider, then the foreground jump.
+  const walk = phase(position, -.06, .39);
+  const glide = phase(position, .39, .55);
+  const flight = phase(position, .55, 1);
+  const stride = Math.floor(walk * 8 + 1) % 4;
+  launchScene.style.setProperty('--launch-walk', walk.toFixed(4));
+  launchScene.style.setProperty('--launch-pose', Math.min(stride, 4 - stride) * 50 + '%');
+  waterStage.style.setProperty('--glide', glide.toFixed(4));
+  waterStage.style.setProperty('--flight', flight.toFixed(4));
+  setRiderFrame('glide', glide);
+  setRiderFrame('flip', flight);
 }
 
 function drawCamera() {
@@ -63,12 +94,19 @@ function drawCamera() {
   previousScroll = window.scrollY;
   inkSlip = delta ? Math.max(-1, Math.min(1, inkSlip * .42 + delta / 62)) : inkSlip * .82;
   if (Math.abs(inkSlip) < .015) inkSlip = 0;
+  const waterCue = mobileMotionQuery.matches && (activeScenes.has(terraceSection) || activeScenes.has(waterStage))
+    ? waterPosition(height) : null;
   for (const scene of activeScenes) {
     const box = scene.getBoundingClientRect();
     if (scene === terraceSection && mobileMotionQuery.matches) {
       const table = terraceGallery.getBoundingClientRect();
       const distance = Math.min(table.width * .72, height * .4);
       const walk = Math.max(0, Math.min(1, (height * .61 - table.bottom) / distance));
+      const ready = walk >= (chefReady ? .90 : .995) && waterCue < -.06;
+      if (chefReady !== ready) {
+        chefReady = ready;
+        setCastSource(grillChef, motionAllowed() && visibleCast.has(grillChef));
+      }
       terraceGallery.style.setProperty('--serve-walk', walk.toFixed(4));
       terraceGallery.style.setProperty('--serve-step', (Math.floor(walk * 12) % 4) * 100 / 3 + '%');
     }
@@ -85,23 +123,7 @@ function drawCamera() {
       const crossing = Math.max(0, Math.min(1, (height * .9 - box.top) / (height * .46)));
       scene.style.setProperty('--dance-entry', crossing.toFixed(4));
     }
-    if (scene === waterStage && mobileMotionQuery.matches) {
-      // The spray stays on the waterline. The eight poses contain the rider's arc.
-      const distance = Math.min(box.width * .95, height * .65);
-      const flight = Math.max(0, Math.min(1, (height * .98 + box.height * .18 - box.bottom) / distance));
-      const frame = Math.min(7, Math.floor(flight * 8));
-      scene.style.setProperty('--flight', flight.toFixed(4));
-      scene.style.setProperty('--flip-x', (frame % 4) * 100 / 3 + '%');
-      scene.style.setProperty('--flip-y', frame < 4 ? '0%' : '100%');
-    }
-    if (scene === launchScene) {
-      // Match her stride to distance travelled. A stopped scroll holds the pose.
-      const walk = Math.max(0, Math.min(1, (height - box.top - box.height * .7) / (height * .52)));
-      const stride = Math.floor(walk * 8 + 1) % 4;
-      scene.style.setProperty('--launch-walk', walk.toFixed(4));
-      scene.style.setProperty('--launch-pose', Math.min(stride, 4 - stride) * 50 + '%');
-      continue;
-    }
+    if (scene === waterStage && waterCue !== null) updateWaterMotion(waterCue);
     const progress = Math.max(-1, Math.min(1, (height - box.height - 2 * box.top) / (height + box.height)));
     scene.style.setProperty('--scene-progress', progress.toFixed(4));
     if (mobileMotionQuery.matches && scene.hasAttribute('data-comic-drift')) {
@@ -146,7 +168,6 @@ for (const scene of scenes) {
     scene.style.removeProperty('--aim-y');
   });
 }
-addEventListener('scroll', queueCamera, {passive:true});
 addEventListener('resize', queueCamera, {passive:true});
 
 const castImages = [...document.querySelectorAll('img[data-cast]:not([data-cue-performer])')];
@@ -191,6 +212,7 @@ function castStill(image) {
 }
 
 function setCastSource(image, animate) {
+  if (mobileMotionQuery.matches && image === grillChef) animate = animate && chefReady;
   if (mobileMotionQuery.matches && image === heroBackflip) {
     animate = animate && !mobileDancefloorActive;
   }

@@ -1,5 +1,5 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
-.water-edge,.launch-scene,.evening-guests,.water-evening-photo,.water-trick { display:none; }
+.water-edge,.launch-scene,.evening-guests,.water-evening-photo,.water-glide,.water-trick { display:none; }
 .arrival-scene,.arrival-heading { display:contents; }
 .waterstage-backdrop { display:contents; }
 
@@ -82,11 +82,13 @@
   }
   .waterstage-riders { translate:-5px 0; }
   .waterstage .waterstage-foreground { width:135%; left:-24%; bottom:-11vw; }
-  .waterstage .waterstage-carve {
-    left:4%; bottom:33%; width:clamp(68px,21vw,140px);
+  .waterstage .waterstage-carve,.waterstage .waterstage-jump { display:none; }
+  .water-glide {
+    position:absolute; display:block; bottom:33%;
+    left:calc(2% + 6% * var(--glide,0)); width:clamp(66px,19vw,138px); aspect-ratio:192 / 191;
+    background:url('/assets/cast/wake-glide-sequence.webp') var(--glide-x,0%) var(--glide-y,0%) / 400% 200% no-repeat;
     opacity:clamp(0,calc(1.55 - 2 * var(--after-takeoff)),1);
   }
-  .waterstage .waterstage-jump { display:none; }
   .waterstage { --after-takeoff:clamp(0,calc((var(--flight,0) - .28) / .72),1); }
   .water-evening-photo {
     position:absolute; inset:36% 0 0; z-index:-1; display:block; pointer-events:none;
@@ -198,6 +200,7 @@
 
 @media(prefers-reduced-motion:reduce) {
   .waterstage { --after-takeoff:.78; }
+  .water-glide { --glide:.5; --glide-x:0%; --glide-y:100%; }
   .water-trick { --flight:.56; --flip-x:0%; --flip-y:100%; }
   .arrival-scene { --reveal:1; }
   .launch-paddler { --walk:1; --launch-pose:50%; }
