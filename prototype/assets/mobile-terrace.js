@@ -3,12 +3,12 @@ const gallery = document.querySelector('[data-terrace-gallery]');
 if (gallery) {
   const slides = [
     {
-      src: '/assets/venue.jpg',
-      alt: 'Терраса парка с деревянным настилом и залом у воды'
-    },
-    {
       src: '/assets/table.jpg',
       alt: 'Стол у панорамного окна с видом на воду'
+    },
+    {
+      src: '/assets/venue.jpg',
+      alt: 'Терраса парка с деревянным настилом и залом у воды'
     },
     {
       src: '/assets/deck-sun.jpg',

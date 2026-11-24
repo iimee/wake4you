@@ -337,6 +337,15 @@ document.addEventListener('click', event => {
 addEventListener('hashchange', canonicalizeLegacyLocation);
 canonicalizeLegacyLocation();
 
+const waterPrices = bookingDialog.querySelector('[data-water-prices]');
+const bookingLinks = bookingDialog.querySelector('.booking-links');
+function placeWaterPrices() {
+  if (mobileMotionQuery.matches) bookingForm.before(waterPrices);
+  else bookingLinks.append(waterPrices);
+  waterPrices.open = mobileMotionQuery.matches && !waterPrices.hidden;
+}
+mobileMotionQuery.addEventListener('change', placeWaterPrices);
+
 function bookingStep(occasion = '') {
   if (!bookingDialog) return;
   bookingResult.hidden = true;
@@ -344,9 +353,9 @@ function bookingStep(occasion = '') {
   bookingChoices.hidden = Boolean(occasion);
   bookingDialog.querySelector('[data-booking-step]').textContent = occasion ? '02 / Несколько деталей' : '01 / Твой день';
   bookingDialog.querySelector('#booking-title').innerHTML = occasion ? 'Собираемся<br>в Wake4You' : 'Как проведём<br>этот день?';
-  const prices = bookingDialog.querySelector('[data-water-prices]');
-  prices.open = false;
-  prices.hidden = !['Вейк', 'SUP', 'Вейк / SUP'].includes(occasion);
+  waterPrices.hidden = !['Вейк', 'SUP', 'Вейк / SUP'].includes(occasion);
+  waterPrices.dataset.activity = occasion;
+  placeWaterPrices();
   if (occasion) {
     bookingForm.elements.occasion.value = occasion;
     bookingDialog.querySelector('[data-change-occasion]').textContent = `← ${occasion} · изменить`;
@@ -360,7 +369,8 @@ function openBooking(occasion, button) {
 }
 document.querySelectorAll('[data-choose]').forEach(button => button.addEventListener('click', () => {
   bookingStep(button.dataset.choose);
-  bookingForm?.elements.name.focus();
+  if (mobileMotionQuery.matches && !waterPrices.hidden) waterPrices.querySelector('summary').focus();
+  else bookingForm.elements.name.focus();
 }));
 document.querySelector('[data-change-occasion]')?.addEventListener('click', () => {
   bookingStep();
@@ -383,6 +393,7 @@ bookingForm?.addEventListener('submit', event => {
   const send = bookingDialog.querySelector('[data-send-booking]');
   send.href = 'https://wa.me/79261017660?text=' + encodeURIComponent(message);
   bookingForm.hidden = true;
+  if (mobileMotionQuery.matches) waterPrices.hidden = true;
   bookingResult.hidden = false;
   bookingDialog.querySelector('#booking-title').textContent = 'Написать в парк';
   bookingDialog.querySelector('[data-booking-step]').textContent = '03 / Твой запрос';

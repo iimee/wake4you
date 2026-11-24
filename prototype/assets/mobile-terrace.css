@@ -1,5 +1,6 @@
 .mobile-terrace-gallery,.mobile-kitchen { display:none; }
 .terrace-feature { display:contents; }
+.mobile-menu-request,.party-invitations { display:none; }
 .terrace-feature .night-actions,.terrace-title-kicker,.terrace-intro,.party-toast { display:none; }
 
 @media(max-width:760px) {
@@ -106,8 +107,15 @@
   .terrace-copy h2,.terrace-copy p { text-shadow:0 2px 9px #151610e0; }
   .terrace-description { display:none; }
   .terrace-intro { display:grid; gap:clamp(10px,3vw,18px); }
-  .terrace-intro .hero-location { max-width:none; font-size:clamp(9px,2.35vw,13px); }
-  .terrace-intro .red-button { padding-inline:clamp(10px,3.6vw,21px); white-space:nowrap; }
+  .terrace-intro .hero-location { max-width:none; font-size:clamp(11px,2.8vw,12px); }
+  .terrace-dance-link { display:inline-flex; gap:6px; align-items:center; min-height:44px; color:#fff9e9; text-decoration:underline; text-underline-offset:4px; font-weight:650; }
+  .terrace-actions button.terrace-menu { display:none; }
+  .terrace-actions .mobile-menu-request { display:inline-flex; align-items:center; font-weight:650; text-decoration:none; }
+  .party-invitations { display:flex; flex-wrap:wrap; align-items:center; gap:5px 18px; padding:16px var(--gutter) 28px; }
+  .party-invitations .night-social-events { width:fit-content; }
+  .event-inquiry { display:inline-flex; align-items:center; min-height:44px; gap:8px; color:#fff6df; font-size:.92rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
+  .booking-shell>.booking-prices { margin:10px 0 18px; font-size:.9rem; }
+  .booking-prices[data-activity="Вейк"] [data-rate="sup"],.booking-prices[data-activity="SUP"] [data-rate="wake"] { display:none; }
   .terrace-intro .hero-actions { order:1; }
   .terrace-intro p {
     margin:0;
