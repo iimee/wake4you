@@ -182,12 +182,6 @@
           <img class="night-pair night-duo-right" data-cast="duo-comic"
          src="/assets/cast/duo-comic-still.webp" alt="Танцующая пара в джинсах и голубом костюме">
         </div>
-        <header class="party-gallery-heading">
-          <h2 class="night-title" id="party-gallery-title" aria-label="Все на танцпол" aria-describedby="party-gallery-kicker">
-            <span class="party-title-line"><span class="party-title-word">Все</span><span class="night-kicker" id="party-gallery-kicker">Вечеринки<br>и корпоративы</span></span>
-            <em>на танцпол</em>
-          </h2>
-        </header>
         <div class="night-copy">
           <p class="night-kicker">Вечеринки и корпоративы</p>
           <h2 class="night-title" id="events-title">Все на<br><em>танцпол</em></h2>
@@ -196,9 +190,23 @@
           </div>
         </div>
         <div class="party-gallery-track" data-party-track tabindex="0" aria-label="Листайте фотографии вечеринки">
-          <img src="/assets/party-dancers.jpg" alt="Гости танцуют в красном и синем свете" loading="lazy">
-          <img src="/assets/dj.jpg" alt="Диджей за пультом на ночной вечеринке" loading="lazy">
-          <img src="/assets/party.jpg" alt="Гости на танцполе под красными навесами" loading="lazy">
+          <div class="party-panel party-cover">
+            <img src="/assets/party-dancers.jpg" alt="Гости танцуют в красном и синем свете" loading="lazy">
+            <header class="party-gallery-heading">
+              <h2 class="night-title" id="party-gallery-title" aria-label="Все на танцпол" aria-describedby="party-gallery-kicker">
+                <span class="party-title-line"><span class="party-title-word">Все</span><span class="night-kicker" id="party-gallery-kicker">Вечеринки<br>и корпоративы</span></span>
+                <em>на танцпол</em>
+              </h2>
+            </header>
+          </div>
+          <div class="party-panel party-mix">
+            <img src="/assets/dj.jpg" alt="Диджей за пультом на ночной вечеринке" loading="lazy">
+            <div class="party-detail" aria-hidden="true"></div>
+          </div>
+          <div class="party-panel party-finale">
+            <img src="/assets/party.jpg" alt="Гости на танцполе под красными навесами" loading="lazy">
+            <div class="party-wide-panel" role="img" aria-label="Танцпол под освещёнными деревьями, вид издалека"></div>
+          </div>
         </div>
         <button class="comic-gallery-arrow party-gallery-arrow party-gallery-prev" type="button" data-party-step="-1" aria-label="Предыдущее фото"></button>
         <button class="comic-gallery-arrow party-gallery-arrow party-gallery-next" type="button" data-party-step="1" aria-label="Следующее фото"></button>

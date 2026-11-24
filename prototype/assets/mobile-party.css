@@ -32,6 +32,10 @@
   scrollbar-width:none;
   overscroll-behavior-inline:contain;
 }
+.party-panel {
+  position:relative; min-width:0; min-height:0; scroll-snap-align:start;
+}
+.party-detail,.party-wide-panel { display:none; }
 .party-gallery-track img {
   display:block;
   width:100%;
@@ -39,7 +43,6 @@
   min-width:0;
   min-height:0;
   object-fit:cover;
-  scroll-snap-align:start;
 }
 .comic-gallery-arrow {
   position:absolute;
@@ -198,7 +201,7 @@
   }
   /* These are adjacent crops of one photograph at exactly the same scale. */
   .party-gallery-track { overflow-y:hidden; }
-  .party-gallery-track > img:first-child {
+  .party-cover > img {
     height:calc(100% + var(--photo-spill)); transform:translateY(calc(0px - var(--photo-spill)));
   }
   .dance-bridge::before {
@@ -209,6 +212,33 @@
   }
   .party-gallery::before {
     background:linear-gradient(to bottom,transparent,#100d1c60 54%,transparent);
+  }
+  .party-panel { overflow:hidden; isolation:isolate; }
+  .party-cover::after {
+    content:""; position:absolute; inset:auto 0 0 auto; width:21%; height:14%;
+    pointer-events:none; background:radial-gradient(#ffe064 1px,transparent 1.45px) 0 0 / 5px 5px;
+    clip-path:polygon(100% 0,100% 100%,0 100%); opacity:.72;
+  }
+  /* The portrait and the inset are two crops of the same photograph. */
+  .party-mix > img { object-position:27% 50%; }
+  .party-detail {
+    display:block; position:absolute; right:-3%; bottom:-1%; width:56%; height:37%;
+    rotate:-5deg; border:4px solid #fff1cf; outline:3px solid #17151a;
+    background:#17151a url('/assets/dj.jpg') 87% 93% / 300% auto no-repeat;
+  }
+  .party-mix::before {
+    content:""; position:absolute; right:0; bottom:0; width:62%; height:42%;
+    background:repeating-linear-gradient(-56deg,#191519 0 2px,#ffd856 2px 6px);
+    clip-path:polygon(20% 15%,100% 0,100% 100%,0 100%);
+  }
+  .party-finale > img { height:62%; object-position:center 65%; }
+  .party-wide-panel {
+    display:block; position:absolute; inset:47% 0 0; background:#fff1cf;
+    clip-path:polygon(0 18%,100% 0,100% 100%,0 100%);
+  }
+  .party-wide-panel::after {
+    content:""; position:absolute; inset:4px 0 0; background:#181218 url('/assets/party-wide.jpg') center 59% / cover;
+    clip-path:inherit;
   }
   .night-pair {
     position:absolute; display:block; top:0; width:var(--pair-size); max-width:none;
