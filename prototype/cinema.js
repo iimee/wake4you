@@ -45,6 +45,7 @@ const terraceGallery = document.querySelector('[data-terrace-gallery]');
 const terraceSection = document.querySelector('#place');
 const launchScene = document.querySelector('.launch-scene');
 const waterStage = document.querySelector('.waterstage');
+const eventSection = document.querySelector('#events');
 const terraceOpening = document.querySelector('.terrace-feature');
 let cameraFrame = 0;
 let previousScroll = window.scrollY;
@@ -79,6 +80,10 @@ function drawCamera() {
         scene.style.setProperty('--terrace-reveal', reveal.toFixed(4));
       }
       continue;
+    }
+    if (scene === eventSection && mobileMotionQuery.matches) {
+      const crossing = Math.max(0, Math.min(1, (height * .9 - box.top) / (height * .46)));
+      scene.style.setProperty('--dance-entry', crossing.toFixed(4));
     }
     if (scene === waterStage && mobileMotionQuery.matches) {
       // The spray stays on the waterline. The eight poses contain the rider's arc.
@@ -149,12 +154,13 @@ const visibleCast = new Set();
 const mobileMotionQuery = matchMedia('(max-width: 760px)');
 const heroBackflip = document.querySelector('.hero-backflip');
 const dancefloorSection = document.querySelector('.night-party');
-const dancefloorCue = dancefloorSection?.querySelector('.night-duo');
+const dancefloorCue = document.querySelector('.dance-bridge');
+const leadingPair = dancefloorCue?.querySelector('.night-duo');
 let mobileDancefloorActive = false;
 
 function updateMobileMotionCue() {
   const active = !mobileMotionQuery.matches || (
-    dancefloorCue && dancefloorCue.getBoundingClientRect().top + dancefloorCue.offsetHeight * .25 <= window.innerHeight * .52
+    leadingPair && dancefloorCue.getBoundingClientRect().top + leadingPair.offsetHeight * .25 <= window.innerHeight * .52
   );
   if (active === mobileDancefloorActive) return;
   mobileDancefloorActive = active;
@@ -201,6 +207,15 @@ for (const image of castImages) {
 const partyGallery = document.querySelector('[data-party-gallery]');
 if (partyGallery) {
   const track = partyGallery.querySelector('[data-party-track]');
+  function syncFirstPhoto() {
+    if (!mobileMotionQuery.matches || !track.clientWidth) return;
+    const visible = Math.max(0, Math.min(1, 1 - track.scrollLeft / track.clientWidth));
+    partyGallery.style.setProperty('--first-photo', visible.toFixed(4));
+  }
+  track.addEventListener('scroll', syncFirstPhoto, {passive:true});
+  new ResizeObserver(syncFirstPhoto).observe(track);
+  syncFirstPhoto();
+
   function movePartySlide(direction) {
     const count = track.children.length;
     const index = Math.round(track.scrollLeft / track.clientWidth);

@@ -1,3 +1,4 @@
+.dance-bridge,
 .hero-backflip,
 .night-ink-panel,
 .night-pair,
@@ -181,24 +182,43 @@
     pointer-events:none;
   }
 
-  .night-pair {
-    position:absolute;
-    top:auto;
-    bottom:calc(var(--pair-gallery-gap) - 10px);
-    z-index:3;
-    display:block;
-    width:calc(var(--pair-width) + var(--pair-growth));
-    max-width:none;
-    height:auto;
-    aspect-ratio:1;
-    margin:0;
-    object-fit:contain;
-    object-position:center bottom;
-    transform:none;
-    pointer-events:none;
+  .party-photos { position:relative; z-index:1; }
+  .party-gallery {
+    --pair-size:64.13vw;
+    --stage-gap:calc(clamp(18px,4vw,30px) - 10px);
+    --step:clamp(34px,11vw,78px);
+    --photo-spill:clamp(38px,14vw,90px);
+    --crossing:calc(var(--dance-entry,0) * var(--first-photo,1));
   }
-  .night-duo { left:-2.75vw; }
-  .night-duo-right { right:-7.6vw; }
+  /* The same two animated cutouts straddle the video and the first photograph. */
+  .dance-bridge {
+    display:block; position:absolute; z-index:3; pointer-events:none; overflow:clip;
+    inset-inline:0; top:calc(0px - var(--pair-size) - var(--stage-gap));
+    height:calc(var(--pair-size) + var(--stage-gap) + var(--step) + 2px);
+  }
+  /* These are adjacent crops of one photograph at exactly the same scale. */
+  .party-gallery-track { overflow-y:hidden; }
+  .party-gallery-track > img:first-child {
+    height:calc(100% + var(--photo-spill)); transform:translateY(calc(0px - var(--photo-spill)));
+  }
+  .dance-bridge::before {
+    content:""; position:absolute; inset-inline:0; bottom:calc(var(--step) + 2px); height:var(--photo-spill);
+    background:url('/assets/party-dancers.jpg') center top / auto calc(100vw + var(--photo-spill)) no-repeat;
+    transform:translateX(calc((var(--first-photo,1) - 1) * 100%));
+    clip-path:polygon(0 calc(100% - 29% * var(--crossing)),100% calc(100% - 99% * var(--crossing)),100% 100%,0 100%);
+  }
+  .party-gallery::before {
+    background:linear-gradient(to bottom,transparent,#100d1c60 54%,transparent);
+  }
+  .night-pair {
+    position:absolute; display:block; top:0; width:var(--pair-size); max-width:none;
+    height:auto; aspect-ratio:1; margin:0; object-fit:contain; pointer-events:none;
+    transform-origin:50% 100%;
+    transform:translateY(calc((var(--stage-gap) + var(--landing)) * var(--crossing)))
+      scale(calc(1 - .035 * var(--crossing)));
+  }
+  .night-duo { left:-2.75vw; --landing:calc(var(--step) * .68); }
+  .night-duo-right { right:-7.6vw; --landing:var(--step); }
 
   .night-copy { display:none; }
   .night-kicker {
@@ -211,7 +231,7 @@
     position:absolute;
     z-index:1;
     inset:0 0 auto;
-    padding:clamp(16px,5.2vw,32px) var(--party-gutter) 0;
+    padding:calc(clamp(16px,5.2vw,32px) + var(--step) * .68 * var(--crossing)) var(--party-gutter) 0;
     text-align:left;
     pointer-events:none;
   }
@@ -247,6 +267,7 @@
   }
   .party-gallery::after {
     content:""; position:absolute; inset:-6px 0 auto; height:13px; z-index:2;
+    opacity:calc(1 - var(--first-photo,1));
     background:linear-gradient(110deg,#f8b25b,#ffc658 54%,transparent 89%);
     clip-path:polygon(0 49%,72% 8%,100% 0,84% 24%,15% 91%,0 100%);
     pointer-events:none;
@@ -256,16 +277,12 @@
 
 @media (prefers-reduced-motion:reduce) {
   .comic-gallery-arrow::before { transition:none; }
+  .party-gallery { --crossing:var(--first-photo,1); }
 }
 
 @media (max-width:760px) and (prefers-reduced-motion:no-preference) {
   body:not(.motion-paused) .hero-backflip {
     translate:0 calc(-4px * var(--comic-drift,0));
   }
-  body:not(.motion-paused) .night-duo {
-    translate:calc(-5px * var(--comic-drift,0)) calc(-7px * var(--comic-drift,0));
-  }
-  body:not(.motion-paused) .night-duo-right {
-    translate:calc(6px * var(--comic-drift,0)) calc(-5px * var(--comic-drift,0));
-  }
+
 }
