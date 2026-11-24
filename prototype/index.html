@@ -259,7 +259,22 @@
     </div>
   </footer>
 
-  <dialog class="menu-dialog" id="menu-panel" aria-label="Меню сайта"><button class="close-button" data-close aria-label="Закрыть меню">×</button><span class="eyebrow">Меню</span><nav><a href="#top">Главная</a><a href="#events">События</a><a href="#place">Место</a><a href="#kitchen">Кухня</a><a href="#water">На воде</a><a href="#visit">Приехать</a></nav></dialog>
+  <dialog class="menu-dialog" id="menu-panel" aria-label="Меню сайта">
+    <div class="menu-bar">
+      <a href="#top" class="menu-home" aria-label="Wake4You — на главную"><img src="/assets/logo.png" width="1764" height="593" alt=""></a>
+      <button class="close-button" data-close aria-label="Закрыть меню" autofocus>×</button>
+    </div>
+    <nav aria-label="Разделы парка">
+      <a class="menu-party" href="#events">
+        <span class="menu-party-copy"><span class="menu-party-kicker">Вечеринки и корпоративы</span><strong>Все на<br><em>танцпол</em></strong></span>
+        <img src="/assets/cast/trio-still.webp" width="443" height="443" loading="lazy" alt="">
+      </a>
+      <a class="menu-row" href="#place">Терраса<span aria-hidden="true">↗</span></a>
+      <a class="menu-row" href="#kitchen">Кухня<span aria-hidden="true">↗</span></a>
+      <a class="menu-row" href="#water">Вейк и SUP<span aria-hidden="true">↗</span></a>
+      <a class="menu-row" href="#visit">Как добраться<span aria-hidden="true">↗</span></a>
+    </nav>
+  </dialog>
   <dialog class="booking-dialog" aria-labelledby="booking-title">
     <button class="close-button" data-close aria-label="Закрыть бронирование">×</button>
     <div class="booking-shell">

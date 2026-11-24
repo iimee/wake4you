@@ -205,6 +205,46 @@ html { scroll-padding-top: var(--nav-height); }
 .booking-optional { display:none; }
 
 @media(max-width:760px) {
+  .site-header .menu-button { min-width:44px; min-height:44px; justify-content:center; }
+  .menu-dialog {
+    --menu-paper:#f4e8ca; --menu-ink:#182120;
+    inset:0 0 auto; margin:0; width:100%; height:fit-content; max-height:100dvh; padding:0 0 max(18px,env(safe-area-inset-bottom));
+    background:var(--menu-paper); color:var(--menu-ink);
+  }
+  .menu-bar {
+    display:flex; align-items:center; justify-content:space-between; padding:6px var(--gutter);
+    background:#151915; color:#fff9e9;
+  }
+  .menu-bar .menu-home { position:relative; overflow:hidden; width:110px; height:48px; padding:0; border:0; }
+  .menu-home img {
+    position:absolute; width:182px; max-width:none; height:auto; left:-35px;
+    filter:grayscale(1) contrast(7) invert(1); mix-blend-mode:screen;
+  }
+  .menu-bar .close-button { position:static; background:transparent; color:inherit; }
+  .menu-dialog>nav { margin:0; }
+  .menu-dialog .menu-party {
+    position:relative; isolation:isolate; overflow:hidden; align-items:end; padding:22px var(--gutter) 27px;
+    min-height:clamp(166px,48vw,270px); border:0; color:#fff9e9; text-decoration:none;
+    background:linear-gradient(76deg,#151215ed,#170d18a1 60%,#1c112239),url('/assets/party-wide.jpg') center 55% / cover;
+    clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),0 100%);
+  }
+  .menu-party img {
+    position:absolute; bottom:-2%; right:1%; width:auto; height:84%; max-width:48%; object-fit:contain; object-position:bottom;
+  }
+  .menu-party-copy { position:relative; z-index:1; }
+  .menu-party-kicker { display:block; margin-bottom:8px; font:650 .65rem/1.25 Golos,Arial,sans-serif; text-transform:uppercase; letter-spacing:.07em; }
+  .menu-party strong { display:block; font:italic 900 clamp(37px,10.4vw,70px)/.87 Golos,Arial,sans-serif; letter-spacing:-.07em; text-transform:uppercase; }
+  .menu-party em { font:inherit; color:#ffe064; }
+  .menu-dialog .menu-row {
+    margin:0 var(--gutter); min-height:clamp(53px,8.5dvh,78px); padding:8px 0;
+    color:inherit; border-bottom:1px solid #18212055; text-decoration:none;
+    font:750 clamp(22px,5.6vw,34px)/1.15 Golos,Arial,sans-serif; letter-spacing:-.045em;
+  }
+  .menu-row span { font:500 1.15rem/1 Golos,Arial,sans-serif; }
+  .menu-dialog a:focus-visible,.menu-dialog button:focus-visible { outline:3px solid #0989ae; outline-offset:-3px; }
+}
+
+@media(max-width:760px) {
   .booking-dialog {
     --booking-photo:url('/assets/table.jpg'); --panel:#f4e8ca; --cream:#182120;
     --muted:#495047; --line:#18212044; color-scheme:light;

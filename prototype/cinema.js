@@ -374,15 +374,18 @@ document.querySelector('.menu-button')?.addEventListener('click', event => {
   openDialog(menuDialog, event.currentTarget);
   event.currentTarget.setAttribute('aria-expanded', 'true');
 });
+mobileMotionQuery.addEventListener('change', event => {
+  if (!event.matches && menuDialog?.open) menuDialog.close();
+});
 menuDialog?.addEventListener('click', event => {
   const link = event.target.closest('a[href]');
   if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-  menuDialog.close();
   const section = document.getElementById(link.hash.slice(1));
   if (section) {
     section.tabIndex = -1;
-    requestAnimationFrame(() => section.focus({preventScroll: true}));
+    openers.set(menuDialog, section);
   }
+  menuDialog.close();
 });
 
 document.addEventListener('click', event => {
