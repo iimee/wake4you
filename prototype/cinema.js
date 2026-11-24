@@ -44,6 +44,7 @@ const activeScenes = new Set();
 const terraceGallery = document.querySelector('[data-terrace-gallery]');
 const terraceSection = document.querySelector('#place');
 const launchScene = document.querySelector('.launch-scene');
+const waterStage = document.querySelector('.waterstage');
 const terraceOpening = document.querySelector('.terrace-feature');
 let cameraFrame = 0;
 let previousScroll = window.scrollY;
@@ -78,6 +79,15 @@ function drawCamera() {
         scene.style.setProperty('--terrace-reveal', reveal.toFixed(4));
       }
       continue;
+    }
+    if (scene === waterStage && mobileMotionQuery.matches) {
+      // The spray stays on the waterline. The eight poses contain the rider's arc.
+      const distance = Math.min(box.width * .95, height * .65);
+      const flight = Math.max(0, Math.min(1, (height * .98 + box.height * .18 - box.bottom) / distance));
+      const frame = Math.min(7, Math.floor(flight * 8));
+      scene.style.setProperty('--flight', flight.toFixed(4));
+      scene.style.setProperty('--flip-x', (frame % 4) * 100 / 3 + '%');
+      scene.style.setProperty('--flip-y', frame < 4 ? '0%' : '100%');
     }
     if (scene === launchScene) {
       // Match her stride to distance travelled. A stopped scroll holds the pose.

@@ -1,5 +1,5 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
-.water-edge,.launch-scene,.evening-guests { display:none; }
+.water-edge,.launch-scene,.evening-guests,.water-evening-photo,.water-trick { display:none; }
 .arrival-scene,.arrival-heading { display:contents; }
 .waterstage-backdrop { display:contents; }
 
@@ -82,8 +82,25 @@
   }
   .waterstage-riders { translate:-5px 0; }
   .waterstage .waterstage-foreground { width:135%; left:-24%; bottom:-11vw; }
-  .waterstage .waterstage-carve { left:8%; bottom:32%; width:clamp(82px,25vw,157px); }
-  .waterstage .waterstage-jump { right:2%; bottom:18%; width:clamp(147px,51vw,335px); }
+  .waterstage .waterstage-carve {
+    left:4%; bottom:33%; width:clamp(68px,21vw,140px);
+    opacity:clamp(0,calc(1.55 - 2 * var(--after-takeoff)),1);
+  }
+  .waterstage .waterstage-jump { display:none; }
+  .waterstage { --after-takeoff:clamp(0,calc((var(--flight,0) - .28) / .72),1); }
+  .water-evening-photo {
+    position:absolute; inset:36% 0 0; z-index:-1; display:block; pointer-events:none;
+    background:url('/assets/party.jpg') 50% 61% / cover;
+    clip-path:ellipse(calc(121% * var(--after-takeoff)) calc(109% * var(--after-takeoff)) at 79% 60%);
+    mask-image:linear-gradient(to bottom,#000 35%,#000 56%,#0009 69%,transparent 87%);
+  }
+  .water-trick {
+    position:absolute; display:block; pointer-events:none;
+    width:clamp(139px,43vw,315px); aspect-ratio:1; left:calc(24% + 32% * var(--flight,0));
+    --ride-out:clamp(0,calc((var(--flight,0) - .79) / .21),1);
+    transform:translateX(calc(var(--ride-out) * 126%));
+    bottom:19%; background:url('/assets/cast/wake-flip-sequence.webp') var(--flip-x,0%) var(--flip-y,0%) / 400% 200% no-repeat;
+  }
   .waterstage .waterstage-title h2 { margin-top:0; color:#ffe064; font-size:clamp(56px,14vw,98px); }
 
   .waterstage-actions .water-label { display:none; }
@@ -180,6 +197,8 @@
 }
 
 @media(prefers-reduced-motion:reduce) {
+  .waterstage { --after-takeoff:.78; }
+  .water-trick { --flight:.56; --flip-x:0%; --flip-y:100%; }
   .arrival-scene { --reveal:1; }
   .launch-paddler { --walk:1; --launch-pose:50%; }
   .waterstage .waterstage-film,
