@@ -111,7 +111,14 @@
   .terrace-dance-link { display:inline-flex; gap:6px; align-items:center; min-height:44px; color:#fff9e9; text-decoration:underline; text-underline-offset:4px; font-weight:650; }
   .terrace-actions button.terrace-menu { display:none; }
   .terrace-actions .mobile-menu-request { display:inline-flex; align-items:center; font-weight:650; text-decoration:none; }
-  .party-invitations { display:flex; flex-wrap:wrap; align-items:center; gap:5px 18px; padding:16px var(--gutter) 28px; }
+  .party-invitations {
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    gap:10px; position:relative; isolation:isolate; min-height:clamp(195px,56vw,345px);
+    padding:20px 51% 24px var(--gutter);
+    background:linear-gradient(90deg,#111615f5,#141312a8 48%,transparent 80%),url('/assets/party-wide.jpg') center 64% / cover;
+  }
+  .evening-guests { position:absolute; z-index:-1; right:0; bottom:5%; width:52%; height:88%; object-fit:contain; object-position:center bottom; pointer-events:none; }
+
   .party-invitations .night-social-events { width:fit-content; }
   .event-inquiry { display:inline-flex; align-items:center; min-height:44px; gap:8px; color:#fff6df; font-size:.92rem; font-weight:650; text-decoration:underline; text-underline-offset:4px; }
   .booking-shell>.booking-prices { margin:10px 0 18px; font-size:.9rem; }
@@ -179,46 +186,46 @@
     scroll-margin-top:calc(var(--nav-height,65px) + 16px);
   }
   .mobile-kitchen {
-    --grill-height:clamp(256px,71vw,440px);
+    --grill-height:clamp(286px,83vw,510px);
     position:relative;
     display:grid;
     grid-template:var(--grill-height) auto / 1fr;
     isolation:isolate;
     color:#211e18;
   }
-  .mobile-kitchen-gallery { grid-area:1 / 1; position:relative; z-index:-1; margin-top:-18px; }
-  .mobile-kitchen-gallery .mobile-kitchen-main {
-    width:100%; height:100%; object-fit:cover; object-position:50% 53%;
-    clip-path:polygon(0 7%,100% 0,100% 93%,0 100%);
+  .grill-stage {
+    grid-area:1 / 1; position:relative; isolation:isolate; margin-top:-14px;
+    background:linear-gradient(0deg,#241a1336,transparent 38%),url('/assets/hero.jpg') 58% 63% / cover;
+    clip-path:polygon(0 5%,100% 0,100% 96%,0 100%);
   }
-  .mobile-kitchen-gallery img:not(.mobile-kitchen-main) {
-    position:absolute; right:4%; bottom:3%; width:22%; aspect-ratio:1;
-    object-fit:cover; border:clamp(2px,.9vw,5px) solid #fff4dc;
-    transform:rotate(5deg); box-shadow:0 2px 5px #20160847;
+  .grill-detail {
+    position:absolute; inset:0 auto 0 0; width:48%; height:100%; object-fit:cover;
+    object-position:58% center; clip-path:polygon(0 0,100% 0,65% 100%,0 100%);
   }
-  .mobile-kitchen-gallery img:nth-child(2) { right:21%; bottom:7%; transform:rotate(-8deg); }
+  .grill-chef { position:absolute; height:85%; width:auto; max-width:65%; object-fit:contain; right:1%; bottom:5%; }
+  .mobile-kitchen-gallery {
+    grid-area:2 / 1; align-self:center; justify-self:end; position:relative;
+    width:33%; height:clamp(75px,23vw,139px); margin-right:3%;
+  }
+  .mobile-kitchen-gallery img {
+    position:absolute; width:66%; aspect-ratio:1; object-fit:cover;
+    border:3px solid #fff4dc; transform:rotate(-7deg);
+  }
+  .mobile-kitchen-gallery img:last-child { bottom:0; right:0; width:57%; transform:rotate(6deg); }
   .mobile-kitchen h3 {
-    grid-area:1 / 1; align-self:end; justify-self:start; margin:0 0 0 var(--gutter);
+    grid-area:1 / 1; position:relative; align-self:end; justify-self:start; margin:0 0 0 var(--gutter);
     padding:.02em .15em .08em .05em;
     font:italic 900 clamp(58px,16vw,100px)/.89 Golos,Arial,sans-serif;
     color:#ffdf56; background:#191b17; letter-spacing:-.085em; text-transform:uppercase;
     transform:rotate(-3deg); transform-origin:left bottom;
   }
   .mobile-kitchen-copy {
-    max-width:39ch; margin:18px var(--gutter) 15px;
+    grid-area:2 / 1; max-width:38ch; margin:18px 39% 17px var(--gutter);
     font-size:clamp(.94rem,3.6vw,1.15rem); line-height:1.43;
   }
   .terrace-actions .terrace-menu {
     justify-self:start; min-height:45px; margin-left:var(--gutter);
     padding:8px 17px; gap:22px; background:#1d241e; color:#fff3d7;
-  }
-  .kitchen-server {
-    position:absolute; z-index:1; bottom:calc(100% - 3px); right:7%;
-    width:clamp(83px,24vw,155px); aspect-ratio:228/300; pointer-events:none;
-  }
-  .kitchen-server i {
-    display:block; width:100%; height:100%;
-    background:url('/assets/cast/serving-strip.webp') 100% center / 400% 100% no-repeat;
   }
   .mobile-terrace-gallery::before {
     content:""; position:absolute; inset:-5px 0 auto; height:12px; z-index:1;
@@ -231,10 +238,3 @@
 @media(prefers-reduced-motion:reduce) {
   .mobile-terrace-frame img { transition:none; }
 }
-
-@media(max-width:760px) and (prefers-reduced-motion:no-preference) {
-  body:not(.motion-paused) .kitchen-server.has-entered { animation:carry-dish .85s ease-out; }
-  body:not(.motion-paused) .kitchen-server.has-entered i { animation:serving-steps .42s steps(3,end) 2; }
-}
-@keyframes carry-dish { from { transform:translate(-55%,8%); } to { transform:none; } }
-@keyframes serving-steps { from { background-position:0% center; } to { background-position:100% center; } }

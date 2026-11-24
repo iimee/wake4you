@@ -1,5 +1,5 @@
 /* Mobile-only water photo, booking actions and compact arrival details. */
-.water-edge { display:none; }
+.water-edge,.launch-scene { display:none; }
 .waterstage-backdrop { display:contents; }
 
 @media(max-width:760px) {
@@ -19,7 +19,7 @@
     position:relative;
     isolation:isolate;
     top:auto;
-    height:clamp(405px,118vw,715px);
+    height:clamp(535px,147vw,845px);
     min-height:0;
   }
   .waterstage .waterstage-panorama::before {
@@ -50,7 +50,14 @@
     background:#a7e5de;
     clip-path:polygon(0 99%,13% 89%,28% 75%,47% 54%,66% 36%,82% 24%,93% 21%,81% 28%,65% 42%,46% 61%,28% 81%,12% 94%,0 100%);
   }
-  .waterstage .waterstage-title { top:clamp(55px,10vw,79px); }
+  .launch-scene { position:absolute; inset:0 0 auto; height:48%; display:block; pointer-events:none; }
+  .launch-scene::before {
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(100deg,#122522b5,transparent 70%),url('/assets/wake-water.jpg') center 63% / cover;
+    clip-path:polygon(0 0,100% 0,100% 87%,0 100%);
+  }
+  .launch-paddler { position:absolute; height:83%; width:54%; object-fit:contain; object-position:right bottom; right:2%; bottom:2%; }
+  .waterstage .waterstage-title { top:clamp(55px,10vw,79px); max-width:47%; }
   .waterstage .waterstage-title > p,
   .waterstage .waterstage-actions > p {
     display:none;
@@ -64,8 +71,8 @@
   }
   .waterstage-riders { translate:-5px 0; }
   .waterstage .waterstage-foreground { width:135%; left:-24%; bottom:-11vw; }
-  .waterstage .waterstage-carve { left:8%; bottom:39%; width:clamp(82px,25vw,157px); }
-  .waterstage .waterstage-jump { right:2%; bottom:26%; width:clamp(147px,51vw,335px); }
+  .waterstage .waterstage-carve { left:8%; bottom:32%; width:clamp(82px,25vw,157px); }
+  .waterstage .waterstage-jump { right:2%; bottom:18%; width:clamp(147px,51vw,335px); }
   .waterstage .waterstage-title h2 { margin-top:0; color:#ffe064; font-size:clamp(56px,14vw,98px); }
 
   .waterstage-actions .water-label { display:none; }
