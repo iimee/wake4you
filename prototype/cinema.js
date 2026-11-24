@@ -41,6 +41,8 @@ function motionAllowed() {
 // Move the camera only while a scene is on screen. Native scroll remains in control.
 const scenes = [...document.querySelectorAll('[data-scene]')];
 const activeScenes = new Set();
+const terraceGallery = document.querySelector('[data-terrace-gallery]');
+const terraceSection = document.querySelector('#place');
 const launchScene = document.querySelector('.launch-scene');
 const terraceOpening = document.querySelector('.terrace-feature');
 let cameraFrame = 0;
@@ -61,6 +63,13 @@ function drawCamera() {
   if (Math.abs(inkSlip) < .015) inkSlip = 0;
   for (const scene of activeScenes) {
     const box = scene.getBoundingClientRect();
+    if (scene === terraceSection && mobileMotionQuery.matches) {
+      const table = terraceGallery.getBoundingClientRect();
+      const distance = Math.min(table.width * .72, height * .4);
+      const walk = Math.max(0, Math.min(1, (height * .61 - table.bottom) / distance));
+      terraceGallery.style.setProperty('--serve-walk', walk.toFixed(4));
+      terraceGallery.style.setProperty('--serve-step', (Math.floor(walk * 12) % 4) * 100 / 3 + '%');
+    }
     if (scene === terraceOpening) {
       if (mobileMotionQuery.matches) {
         const distance = Math.min(height * .48, box.height * .55);
@@ -107,7 +116,7 @@ const sceneAccents = new IntersectionObserver(entries => {
     sceneAccents.unobserve(entry.target);
   }
 }, {threshold:.45});
-document.querySelectorAll('.water-edge, .mobile-terrace-frame').forEach(el => sceneAccents.observe(el));
+document.querySelectorAll('.water-edge').forEach(el => sceneAccents.observe(el));
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 for (const scene of scenes) {
   sceneObserver.observe(scene);

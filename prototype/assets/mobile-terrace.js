@@ -47,7 +47,7 @@ if (gallery) {
     }
     if (thisChange !== changeId) return;
 
-    frame.toggleAttribute('data-table-scene', activeIndex === 0);
+    gallery.toggleAttribute('data-table-scene', activeIndex === 0);
     image.src = slide.src;
     image.alt = slide.alt;
     frame.classList.remove('is-changing');
